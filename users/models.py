@@ -3,17 +3,26 @@ from django.contrib.auth.models import PermissionsMixin
 from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from model_utils import Choices
 
 from .managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    USER_TYPES = Choices(
+        (0, 'customer', _('Customer')),
+        (1, 'employee', _('Employee')),
+        (2, 'manager', _('Manager')),
+        (3, 'lead', _('Lead')),
+        (4, 'admin', _('Admin'))
+    )
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
     date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
     is_active = models.BooleanField(_('active'), default=True)
     is_staff = models.BooleanField(_('is staff'), default=False)
+    user_type = models.PositiveSmallIntegerField(choices=USER_TYPES, default=USER_TYPES.customer)
 
     objects = UserManager()
 
@@ -42,3 +51,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         """
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+# TODO: add Employee and Manager models
