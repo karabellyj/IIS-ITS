@@ -53,3 +53,6 @@ INSTALLED_APPS.extend([
 # See https://docs.divio.com/en/latest/how-to/configure-settings.html#list
 
 AUTH_USER_MODEL = 'users.User'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
