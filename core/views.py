@@ -14,3 +14,4 @@ class TicketListView(FilterView):
 
 class TicketCreateView(CreateView):
     model = Ticket
+    fields = ('name', 'description', 'product',)
