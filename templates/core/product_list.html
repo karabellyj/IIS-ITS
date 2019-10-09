@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load mptt_tags %}
+{% block title %}Products{% endblock %}
+{% block content %}
+    <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit"/>
+    </form>
+    <ul>
+        {% recursetree object_list %}
+            <li>
+                {{ node.name }}
+                {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+        {% if not object_list %}
+            No products yet.
+        {% endif %}
+    </ul>
+    {#    TODO: add pagination handling #}
+{% endblock %}
