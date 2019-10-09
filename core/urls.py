@@ -11,4 +11,5 @@ urlpatterns = [
     path('product/create/', views.ProductCreateView.as_view(), name='product-create'),
     path('tasks/', views.TaskListView.as_view(), name='task-list'),
     path('task/create/', views.TaskCreateView.as_view(), name='task-create'),
+    path('comment/create/', views.CommentCreateView.as_view(), name='comment-create'),
 ]

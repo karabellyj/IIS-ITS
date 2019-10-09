@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 from django_filters.views import FilterView
 
 from .filters import TicketFilter
-from .models import Ticket, Product, Task
+from .models import Ticket, Product, Task, Comment
 
 
 class TicketListView(FilterView):
@@ -42,3 +42,16 @@ class TaskCreateView(CreateView):
     model = Task
     fields = ('description', 'state', 'estimated',)
     success_url = reverse_lazy('core:task-list')
+
+
+class CommentCreateView(CreateView):
+    model = Comment
+    fields = ('text', 'ticket', 'user')
+    success_url = reverse_lazy('home')
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial = initial.copy()
+        initial['ticket'] = self.request.GET.get('ticket')
+        initial['user'] = self.request.user.pk
+        return initial
