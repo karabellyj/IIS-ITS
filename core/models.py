@@ -15,9 +15,9 @@ class Comment(models.Model):
 
 class Ticket(models.Model):
     name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    description = models.TextField()
     state = models.CharField(max_length=255)
-    created = models.DateTimeField()
+    created = models.DateTimeField(auto_now_add=True)
 
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='tickets')
 
