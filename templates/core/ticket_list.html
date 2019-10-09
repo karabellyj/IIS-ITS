@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Tickets{% endblock %}
+{% block content %}
+    <ul>
+    {% for ticket in object_list %}
+        <li>{{ ticket.created|date }} - {{ ticket.name }}</li>
+    {% empty %}
+        <li>No tickets yet.</li>
+    {% endfor %}
+    </ul>
+    {#    TODO: add pagination handling #}
+{% endblock %}
