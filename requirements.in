@@ -4,3 +4,4 @@ https://control.divio.com/api/v1/apps/serve/aldryn-django/2.2.5.1/73763ae4-1da2-
 https://control.divio.com/api/v1/apps/serve/aldryn-sso/1.6.0/6d90e844-d7ef-4faa-b527-5df3d49277be/aldryn-sso-1.6.0.tar.gz#egg=aldryn-sso==1.6.0
 # </INSTALLED_ADDONS>
 django-model-utils==3.2.0
+django-mptt==0.10.0

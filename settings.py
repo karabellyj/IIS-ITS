@@ -44,6 +44,9 @@ aldryn_addons.settings.load(locals())
 
 INSTALLED_APPS.extend([
     # Extend the INSTALLED_APPS setting by listing additional applications here
+    'mptt',
+
+    # Custom
     'core',
     'users',
 ])
