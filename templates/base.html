@@ -5,6 +5,17 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+<navbar>
+    <a href="{% url 'core:ticket-list' %}">Tickets</a>
+    {% if user.is_authenticated %}
+        Hi {{ user.email }}!
+        <p><a href="{% url 'logout' %}">logout</a></p>
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">login</a> |
+        <a href="{% url 'signup' %}">signup</a>
+    {% endif %}
+</navbar>
 {% block content %}{% endblock %}
 </body>
 </html>
