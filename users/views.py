@@ -4,11 +4,11 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 
 from .models import User
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomerSignUpForm
 
 
 class SignUpView(CreateView):
-    form_class = CustomUserCreationForm
+    form_class = CustomerSignUpForm
     success_url = reverse_lazy('home')
     template_name = 'users/signup.html'
 
