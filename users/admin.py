@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import User
+from .models import User, Customer, Employee, Manager, Lead
 
 
 class CustomUserAdmin(UserAdmin):
@@ -32,3 +32,7 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
+admin.site.register(Customer)
+admin.site.register(Employee)
+admin.site.register(Manager)
+admin.site.register(Lead)
