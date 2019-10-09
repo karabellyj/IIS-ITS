@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 from django_filters.views import FilterView
 
 from .filters import TicketFilter
-from .models import Ticket, Product
+from .models import Ticket, Product, Task
 
 
 class TicketListView(FilterView):
@@ -30,3 +30,15 @@ class ProductCreateView(CreateView):
     model = Product
     fields = ('name', 'parent',)
     success_url = reverse_lazy('core:product-list')
+
+
+class TaskListView(FilterView):
+    model = Task
+    filterset_fields = ('state',)
+    template_name = 'core/task_list.html'
+
+
+class TaskCreateView(CreateView):
+    model = Task
+    fields = ('description', 'state', 'estimated',)
+    success_url = reverse_lazy('core:task-list')

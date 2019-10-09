@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Tasks{% endblock %}
+{% block content %}
+    <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+    <ul>
+    {% for task in object_list %}
+        <li>{{ task.description }} - {{ task.reported|time }}</li>
+    {% empty %}
+        <li>No tasks yet.</li>
+    {% endfor %}
+    </ul>
+    {#    TODO: add pagination handling #}
+{% endblock %}

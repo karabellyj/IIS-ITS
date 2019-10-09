@@ -9,4 +9,6 @@ urlpatterns = [
     path('ticket/create/', views.TicketCreateView.as_view(), name='ticket-create'),
     path('products/', views.ProductListView.as_view(), name='product-list'),
     path('product/create/', views.ProductCreateView.as_view(), name='product-create'),
+    path('tasks/', views.TaskListView.as_view(), name='task-list'),
+    path('task/create/', views.TaskCreateView.as_view(), name='task-create'),
 ]
