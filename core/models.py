@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class Comment(models.Model):
     text = models.TextField()
@@ -16,6 +15,7 @@ class Ticket(models.Model):
 class Attachment(models.Model):
     name = models.CharField(max_length=255)
     file = models.FileField()
+
 
 class Task(models.Model):
     description = models.CharField(max_length=255)
