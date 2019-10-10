@@ -28,7 +28,7 @@ class ProductListView(FilterView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ('name', 'parent',)
+    fields = ('name', 'manager', 'parent',)
     success_url = reverse_lazy('core:product-list')
 
 
