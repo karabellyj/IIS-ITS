@@ -20,6 +20,7 @@ class Ticket(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='tickets')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tickets')
 
 
 class Attachment(models.Model):
