@@ -33,8 +33,8 @@ class Attachment(models.Model):
 class Task(models.Model):
     description = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
-    estimated = models.TimeField()
-    reported = models.TimeField(null=True, blank=True)
+    estimated = models.DurationField()
+    reported = models.DurationField(null=True, blank=True)
 
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='tasks')
 
