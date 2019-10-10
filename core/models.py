@@ -3,7 +3,7 @@ from django.db import models
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
-from users.models import Employee
+from users.models import Employee, Manager
 
 
 class Comment(models.Model):
@@ -42,6 +42,7 @@ class Product(MPTTModel):
     name = models.CharField(max_length=255, unique=True)
 
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    manager = models.ForeignKey(Manager, on_delete=models.CASCADE, related_name='products')
 
     class MPTTMeta:
         order_insertion_by = ['name']
