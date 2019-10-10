@@ -9,7 +9,7 @@
     <ul>
         {% recursetree object_list %}
             <li>
-                {{ node.name }}
+                <a href="{% url 'core:product-detail' node.pk %}">{{ node.name }}</a>
                 {% if not node.is_leaf_node %}
                     <ul class="children">
                         {{ children }}

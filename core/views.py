@@ -42,6 +42,10 @@ class ProductCreateView(CreateView):
     success_url = reverse_lazy('core:product-list')
 
 
+class ProductDetailView(DetailView):
+    model = Product
+
+
 class TaskListView(FilterView):
     model = Task
     filterset_fields = ('state',)
