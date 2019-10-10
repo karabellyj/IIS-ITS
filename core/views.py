@@ -54,8 +54,12 @@ class TaskListView(FilterView):
 
 class TaskCreateView(CreateView):
     model = Task
-    fields = ('description', 'state', 'estimated',)
+    fields = ('description', 'state', 'estimated', 'employee',)
     success_url = reverse_lazy('core:task-list')
+
+
+class TaskDetailView(DetailView):
+    model = Task
 
 
 class CommentCreateView(CreateView):

@@ -7,7 +7,7 @@
     </form>
     <ul>
     {% for task in object_list %}
-        <li>{{ task.description }} - {{ task.reported|time }}</li>
+        <li><a href="{% url 'core:task-detail' task.pk %}">{{ task.description }} - {{ task.reported|time }}</a></li>
     {% empty %}
         <li>No tasks yet.</li>
     {% endfor %}
