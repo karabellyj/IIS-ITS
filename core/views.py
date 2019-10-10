@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django_filters.views import FilterView
 
 from .filters import TicketFilter
@@ -15,8 +15,18 @@ class TicketListView(FilterView):
 
 class TicketCreateView(CreateView):
     model = Ticket
-    fields = ('name', 'description', 'product',)
+    fields = ('name', 'description', 'product', 'author',)
     success_url = reverse_lazy('core:ticket-list')
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial = initial.copy()
+        initial['author'] = self.request.user.pk
+        return initial
+
+
+class TicketDetailView(DetailView):
+    model = Ticket
 
 
 class ProductListView(FilterView):

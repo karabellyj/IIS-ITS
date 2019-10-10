@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Ticket detail{% endblock %}
+{% block content %}
+    <h1>{{ object.name }}</h1>
+    <p>{{ object.description }}</p>
+    <p>{{ object.state }}</p>
+    <p>Created {{ object.created|date }} by {{ object.author }}</p>
+{% endblock %}
