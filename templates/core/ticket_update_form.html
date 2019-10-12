@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Update ticket{% endblock %}
+{% block content %}
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <button class="uk-button uk-button-primary" type="submit">Submit</button>
+    </form>
+{% endblock %}
