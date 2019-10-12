@@ -15,4 +15,5 @@ urlpatterns = [
     path('task/create/', views.TaskCreateView.as_view(), name='task-create'),
     path('task/<int:pk>/', views.TaskDetailView.as_view(), name='task-detail'),
     path('comment/create/', views.CommentCreateView.as_view(), name='comment-create'),
+    path('attachment/create/', views.AttachmentCreateView.as_view(), name='attachment-create'),
 ]

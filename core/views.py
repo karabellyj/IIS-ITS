@@ -3,7 +3,7 @@ from django.views.generic import CreateView, DetailView
 from django_filters.views import FilterView
 
 from .filters import TicketFilter
-from .models import Ticket, Product, Task, Comment
+from .models import Ticket, Product, Task, Comment, Attachment
 
 
 class TicketListView(FilterView):
@@ -72,4 +72,16 @@ class CommentCreateView(CreateView):
         initial = initial.copy()
         initial['ticket'] = self.request.GET.get('ticket')
         initial['user'] = self.request.user.pk
+        return initial
+
+
+class AttachmentCreateView(CreateView):
+    model = Attachment
+    fields = ('name', 'file', 'ticket',)
+    success_url = reverse_lazy('home')
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial = initial.copy()
+        initial['ticket'] = self.request.GET.get('ticket')
         return initial
