@@ -20,8 +20,8 @@
         </div>
         <div class="uk-navbar-right">
             {% if user.is_authenticated %}
-                Hi {{ user.email }}
-                <p><a href="{% url 'logout' %}">logout</a></p>
+                <span class="uk-margin-small-right">Hi {{ user.email }}</span>
+                <a class="uk-button uk-button-default uk-margin-small-right" href="{% url 'logout' %}">logout</a>
             {% else %}
                 <div class="uk-navbar-item">
                     <span class="uk-margin-small-right">You are not logged in</span>
