@@ -22,12 +22,18 @@ class Ticket(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='tickets')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tickets')
 
+    def __str__(self):
+        return self.name
+
 
 class Attachment(models.Model):
     name = models.CharField(max_length=255)
     file = models.FileField()
 
     ticket = models.ForeignKey('Ticket', on_delete=models.CASCADE, related_name='attachments')
+
+    def __str__(self):
+        return self.name
 
 
 class Task(models.Model):
@@ -38,6 +44,9 @@ class Task(models.Model):
 
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='tasks')
 
+    def __str__(self):
+        return self.description
+
 
 class Product(MPTTModel):
     name = models.CharField(max_length=255, unique=True)
@@ -47,3 +56,6 @@ class Product(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by = ['name']
+
+    def __str__(self):
+        return self.name
