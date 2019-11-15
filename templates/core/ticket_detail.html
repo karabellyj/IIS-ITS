@@ -6,4 +6,5 @@
     <p>{{ object.state }}</p>
     <p>Created {{ object.created|date }} by {{ object.author }}</p>
     <a href="{% url 'core:ticket-update' object.pk %}" class="uk-button uk-button-default">Update ticket</a>
+    <a href="{% url 'core:ticket-comment' object.pk %}" class="uk-button uk-button-default">Comment ticket</a>
 {% endblock %}

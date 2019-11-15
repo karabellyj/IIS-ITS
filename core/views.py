@@ -76,7 +76,7 @@ class CommentCreateView(CreateView):
     def get_initial(self):
         initial = super().get_initial()
         initial = initial.copy()
-        initial['ticket'] = self.request.GET.get('ticket')
+        initial['ticket'] = self.kwargs.get(self.pk_url_kwarg)
         initial['user'] = self.request.user.pk
         return initial
 
