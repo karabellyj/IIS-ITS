@@ -89,5 +89,5 @@ class AttachmentCreateView(CreateView):
     def get_initial(self):
         initial = super().get_initial()
         initial = initial.copy()
-        initial['ticket'] = self.request.GET.get('ticket')
+        initial['ticket'] = self.kwargs.get(self.pk_url_kwarg)
         return initial
