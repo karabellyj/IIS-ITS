@@ -56,14 +56,26 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
+    def __str__(self):
+        return self.user.email
+
 
 class Employee(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+    def __str__(self):
+        return self.user.email
 
 
 class Manager(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
+    def __str__(self):
+        return self.user.email
+
 
 class Lead(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+    def __str__(self):
+        return self.user.email
