@@ -18,7 +18,7 @@ class TicketCreateView(PermissionRequiredMixin, CreateView):
     model = Ticket
     fields = ('name', 'description', 'product', 'author',)
     success_url = reverse_lazy('core:ticket-list')
-    permission_required = ('ticket.can_add',)
+    permission_required = ('core.add_ticket',)
 
     def get_initial(self):
         initial = super().get_initial()
@@ -35,7 +35,7 @@ class TicketUpdateView(PermissionRequiredMixin, UpdateView):
     model = Ticket
     fields = ('name', 'description', 'product')
     success_url = reverse_lazy('core:ticket-list')
-    permission_required = ('ticket.can_change',)  # TODO: only owner should be able to change
+    permission_required = ('core.change_ticket',)  # TODO: only owner should be able to change
 
 
 class ProductListView(PermissionRequiredMixin, FilterView):
@@ -43,45 +43,45 @@ class ProductListView(PermissionRequiredMixin, FilterView):
     paginate_by = 25
     filterset_fields = ('name',)
     template_name = 'core/product_list.html'
-    permission_required = ('product.can_view',)
+    permission_required = ('core.view_product',)
 
 
 class ProductCreateView(PermissionRequiredMixin, CreateView):
     model = Product
     fields = ('name', 'manager', 'parent',)
     success_url = reverse_lazy('core:product-list')
-    permission_required = ('product.can_add',)
+    permission_required = ('core.add_product',)
 
 
 class ProductDetailView(PermissionRequiredMixin, DetailView):
     model = Product
-    permission_required = ('product.can_view',)
+    permission_required = ('core.view_product',)
 
 
 class TaskListView(PermissionRequiredMixin, FilterView):
     model = Task
     filterset_fields = ('state',)
     template_name = 'core/task_list.html'
-    permission_required = ('task.can_view',)
+    permission_required = ('core.view_task',)
 
 
 class TaskCreateView(PermissionRequiredMixin, CreateView):
     model = Task
     fields = ('description', 'state', 'estimated', 'employee',)
     success_url = reverse_lazy('core:task-list')
-    permission_required = ('task.can_add',)
+    permission_required = ('core.add_task',)
 
 
 class TaskDetailView(PermissionRequiredMixin, DetailView):
     model = Task
-    permission_required = ('task.can_view',)
+    permission_required = ('core.view_task',)
 
 
 class CommentCreateView(PermissionRequiredMixin, CreateView):
     model = Comment
     fields = ('text', 'ticket', 'user')
     success_url = reverse_lazy('home')
-    permission_required = ('comment.can_add',)
+    permission_required = ('core.add_comment',)
 
     def get_initial(self):
         initial = super().get_initial()
@@ -95,7 +95,7 @@ class AttachmentCreateView(PermissionRequiredMixin, CreateView):
     model = Attachment
     fields = ('name', 'file', 'ticket',)
     success_url = reverse_lazy('home')
-    permission_required = ('attachment.can_add',)
+    permission_required = ('core.add_attachment',)
 
     def get_initial(self):
         initial = super().get_initial()
