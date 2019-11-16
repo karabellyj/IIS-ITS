@@ -14,8 +14,12 @@
             <a class="uk-navbar-item uk-logo" href="{% url 'home' %}">Logo</a>
             <ul class="uk-navbar-nav">
                 <li><a href="{% url 'core:ticket-list' %}">Tickets</a></li>
-                <li><a href="{% url 'core:product-list' %}">Products</a></li>
-                <li><a href="{% url 'core:task-list' %}">Tasks</a></li>
+                {% if perms.core.view_product %}
+                    <li><a href="{% url 'core:product-list' %}">Products</a></li>
+                {% endif %}
+                {% if perms.core.view_task %}
+                    <li><a href="{% url 'core:task-list' %}">Tasks</a></li>
+                {% endif %}
             </ul>
         </div>
         <div class="uk-navbar-right">

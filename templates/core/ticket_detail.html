@@ -5,7 +5,13 @@
     <p>{{ object.description }}</p>
     <p>{{ object.state }}</p>
     <p>Created {{ object.created|date }} by {{ object.author }}</p>
-    <a href="{% url 'core:ticket-update' object.pk %}" class="uk-button uk-button-default">Update ticket</a>
-    <a href="{% url 'core:ticket-comment' object.pk %}" class="uk-button uk-button-default">Comment ticket</a>
-    <a href="{% url 'core:ticket-attach' object.pk%}" class="uk-button uk-button-default">Add attachment</a>
+    {% if perms.core.change_ticket %}
+        <a href="{% url 'core:ticket-update' object.pk %}" class="uk-button uk-button-default">Update ticket</a>
+    {% endif %}
+    {% if perms.core.add_comment %}
+        <a href="{% url 'core:ticket-comment' object.pk %}" class="uk-button uk-button-default">Comment ticket</a>
+    {% endif %}
+    {% if perms.core.add_attachment %}
+        <a href="{% url 'core:ticket-attach' object.pk%}" class="uk-button uk-button-default">Add attachment</a>
+    {% endif %}
 {% endblock %}

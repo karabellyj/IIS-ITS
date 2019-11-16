@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
 {% block content %}
-    <a href="{% url 'core:ticket-create' %}" class="uk-button uk-button-default">Create ticket</a>
-    <a href="{% url 'core:product-create' %}" class="uk-button uk-button-default">Create product</a>
-    <a href="{% url 'core:task-create' %}" class="uk-button uk-button-default">Create task</a>
+    {% if perms.core.add_ticket %}
+        <a href="{% url 'core:ticket-create' %}" class="uk-button uk-button-default">Create ticket</a>
+    {% endif %}
+    {% if perms.core.add_product %}
+        <a href="{% url 'core:product-create' %}" class="uk-button uk-button-default">Create product</a>
+    {% endif %}
+    {% if perms.core.add_task %}
+        <a href="{% url 'core:task-create' %}" class="uk-button uk-button-default">Create task</a>
+    {% endif %}
 {% endblock %}
