@@ -28,7 +28,7 @@ class Ticket(models.Model):
 
 class Attachment(models.Model):
     name = models.CharField(max_length=255)
-    file = models.FileField()
+    image = models.ImageField()
 
     ticket = models.ForeignKey('Ticket', on_delete=models.CASCADE, related_name='attachments')
 
