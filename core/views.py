@@ -1,4 +1,5 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_filters.views import FilterView
@@ -31,11 +32,14 @@ class TicketDetailView(DetailView):
     model = Ticket
 
 
-class TicketUpdateView(PermissionRequiredMixin, UpdateView):
+class TicketUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ticket
     fields = ('name', 'description', 'product')
     success_url = reverse_lazy('core:ticket-list')
     permission_required = ('core.change_ticket',)  # TODO: only owner should be able to change
+
+    def test_func(self):
+        return True if self.request.user == self.get_object().author else False
 
 
 class ProductListView(PermissionRequiredMixin, FilterView):
@@ -92,11 +96,15 @@ class CommentCreateView(PermissionRequiredMixin, CreateView):
         return initial
 
 
-class AttachmentCreateView(PermissionRequiredMixin, CreateView):
+class AttachmentCreateView(PermissionRequiredMixin, UserPassesTestMixin, CreateView):
     model = Attachment
     fields = ('name', 'image', 'ticket',)
     success_url = reverse_lazy('home')
     permission_required = ('core.add_attachment',)
+
+    def test_func(self):
+        task = get_object_or_404(Ticket, pk=self.kwargs.get(self.pk_url_kwarg))
+        return True if self.request.user == task.author else False
 
     def get_initial(self):
         initial = super().get_initial()
