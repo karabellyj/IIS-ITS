@@ -41,8 +41,10 @@ class Attachment(models.Model):
 
 
 class Task(models.Model):
+    STATE = Choices(('analysis', _('analysis')), ('resolving', _('resolving')), ('implementing', _('implementing')),
+                    ('testing', _('testing')), ('done', _('done')))
     description = models.CharField(max_length=255)
-    state = models.CharField(max_length=255)
+    state = models.CharField(max_length=255, choices=STATE, default=STATE.analysis)
     estimated = models.DurationField()
     reported = models.DurationField(null=True, blank=True)
 
