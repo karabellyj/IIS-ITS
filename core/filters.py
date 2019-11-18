@@ -6,4 +6,7 @@ from .models import Ticket
 class TicketFilter(FilterSet):
     class Meta:
         model = Ticket
-        fields = ('name', 'state')
+        fields = {
+            'name': ['icontains'],
+            'state': ['exact']
+        }
