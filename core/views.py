@@ -93,7 +93,7 @@ class CommentCreateView(PermissionRequiredMixin, CreateView):
 
 class AttachmentCreateView(PermissionRequiredMixin, CreateView):
     model = Attachment
-    fields = ('name', 'file', 'ticket',)
+    fields = ('name', 'image', 'ticket',)
     success_url = reverse_lazy('home')
     permission_required = ('core.add_attachment',)
 
