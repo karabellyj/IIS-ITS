@@ -10,6 +10,15 @@ GROUPS_PERMISSIONS = {
         models.Comment: ['add', 'change', 'view'],
         models.Attachment: ['add', 'view', 'delete'],
     },
+    'Employees': {
+        # Customers permissions
+        models.Ticket: ['add', 'change', 'delete', 'view'],
+        models.Comment: ['add', 'change', 'view'],
+        models.Attachment: ['add', 'view', 'delete'],
+
+        # Employees permissions
+        models.Task: ['change', 'view']
+    }
 }
 
 
