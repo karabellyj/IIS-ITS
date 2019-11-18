@@ -7,6 +7,8 @@ from core import models
 GROUPS_PERMISSIONS = {
     'Customers': {
         models.Ticket: ['add', 'change', 'delete', 'view'],
+        models.Comment: ['add', 'change', 'view'],
+        models.Attachment: ['add', 'view', 'delete'],
     },
 }
 
