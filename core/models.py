@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext as _
+from model_utils import Choices
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
@@ -14,9 +16,11 @@ class Comment(models.Model):
 
 
 class Ticket(models.Model):
+    STATE = Choices(('analysis', _('analysis')), ('resolving', _('resolving')), ('implementing', _('implementing')),
+                    ('testing', _('testing')), ('done', _('done')))
     name = models.CharField(max_length=255)
     description = models.TextField()
-    state = models.CharField(max_length=255)
+    state = models.CharField(max_length=255, choices=STATE, default=STATE.analysis)
     created = models.DateTimeField(auto_now_add=True)
 
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='tickets')
