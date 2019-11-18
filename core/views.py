@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 from django_filters.views import FilterView
 
@@ -87,6 +87,7 @@ class CommentCreateView(PermissionRequiredMixin, CreateView):
         initial = super().get_initial()
         initial = initial.copy()
         initial['ticket'] = self.kwargs.get(self.pk_url_kwarg)
+        self.success_url = reverse('core:ticket-detail', kwargs={'pk': initial['ticket']})
         initial['user'] = self.request.user.pk
         return initial
 
