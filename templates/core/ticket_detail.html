@@ -12,6 +12,17 @@
         <a href="{% url 'core:ticket-comment' object.pk %}" class="uk-button uk-button-default">Comment ticket</a>
     {% endif %}
     {% if perms.core.add_attachment %}
-        <a href="{% url 'core:ticket-attach' object.pk%}" class="uk-button uk-button-default">Add attachment</a>
+        <a href="{% url 'core:ticket-attach' object.pk %}" class="uk-button uk-button-default">Add attachment</a>
     {% endif %}
+    <ul>
+        {% for comment in object.comments.all %}
+            <li>
+                <p>{{ comment.text }}</p>
+                <div>
+                    <p>by {{ comment.user }}</p>
+                </div>
+            </li>
+        {% endfor %}
+
+    </ul>
 {% endblock %}
