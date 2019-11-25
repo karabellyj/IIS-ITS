@@ -20,6 +20,9 @@
                 {% if perms.core.view_task %}
                     <li><a href="{% url 'core:task-list' %}">Tasks</a></li>
                 {% endif %}
+                {% if perms.users.view_user %}
+                    <li><a href="{% url 'users:user-list' %}">Users</a></li>
+                {% endif %}
             </ul>
         </div>
         <div class="uk-navbar-right">

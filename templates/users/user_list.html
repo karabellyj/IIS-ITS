@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Users{% endblock %}
+{% block content %}
+    <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+    <ul>
+    {% for user in object_list %}
+        <li><a href="{% url 'users:user-detail' user.pk %}">{{ user.email }}</a></li>
+    {% empty %}
+        <li>No users yet.</li>
+    {% endfor %}
+    </ul>
+    {#    TODO: add pagination handling #}
+{% endblock %}

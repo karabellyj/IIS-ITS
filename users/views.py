@@ -1,8 +1,12 @@
 from django.contrib.auth import login
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView, UpdateView
+from django_filters.views import FilterView
 
+from .filters import UserFilter
 from .models import User
 from .forms import CustomUserCreationForm, CustomerSignUpForm
 
@@ -20,3 +24,16 @@ class SignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect(self.success_url)
+
+
+class UserListView(PermissionRequiredMixin, FilterView):
+    model = User
+    paginate_by = 25
+    filterset_class = UserFilter
+    permission_required = ('users.view_user',)
+    template_name = 'users/user_list.html'
+
+
+class UserDetailView(PermissionRequiredMixin, DetailView):
+    model = User
+    permission_required = ('users.view_user',)
