@@ -27,3 +27,9 @@ class CustomerSignUpForm(UserCreationForm):
         user.save()
         customer = Customer.objects.create(user=user)
         return user
+
+
+class AllUsersCreateForm(UserCreationForm):
+    class Meta(CustomUserCreationForm.Meta):
+        model = User
+        fields = CustomUserCreationForm.Meta.fields + ('first_name', 'last_name', 'user_type')

@@ -10,4 +10,7 @@
     {% if perms.core.add_task %}
         <a href="{% url 'core:task-create' %}" class="uk-button uk-button-default">Create task</a>
     {% endif %}
+    {% if perms.users.add_user %}
+        <a href="{% url 'users:user-create' %}" class="uk-button uk-button-default">Create user</a>
+    {% endif %}
 {% endblock %}

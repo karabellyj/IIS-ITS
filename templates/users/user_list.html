@@ -6,8 +6,8 @@
         <input type="submit" />
     </form>
     <ul>
-    {% for user in object_list %}
-        <li><a href="{% url 'users:user-detail' user.pk %}">{{ user.email }}</a></li>
+    {% for object in object_list %}
+        <li><a href="{% url 'users:user-detail' object.pk %}">{{ object.email }}</a></li>
     {% empty %}
         <li>No users yet.</li>
     {% endfor %}
