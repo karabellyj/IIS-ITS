@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 
 from .filters import UserFilter
@@ -49,3 +49,10 @@ class UserCreateView(PermissionRequiredMixin, CreateView):
     def form_valid(self, form):
         user = form.save()
         return redirect(self.success_url)
+
+
+class UserDeleteView(PermissionRequiredMixin, DeleteView):
+    model = User
+    success_url = reverse_lazy('users:user-list')
+    context_object_name = 'user_object'
+    permission_required = ('users.delete_user',)
