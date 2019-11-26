@@ -10,7 +10,8 @@
     {% endif %}
     <ul>
     {% for object in object_list %}
-        <li><a href="{% url 'users:user-detail' object.pk %}">{{ object.email }}</a> <a href="{% url 'users:user-delete' object.pk %}">&#x2717;</a></li>
+        <li><a href="{% url 'users:user-detail' object.pk %}">{{ object.email }}</a> <a
+                href="{% url 'users:user-update' object.pk %}">&#x270E;</a> <a href="{% url 'users:user-delete' object.pk %}">&#x2717;</a></li>
     {% empty %}
         <li>No users yet.</li>
     {% endfor %}
