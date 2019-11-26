@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django_filters.views import FilterView
 
 from .filters import UserFilter
-from .models import User, Employee, Customer, Manager, Lead
+from .models import User
 from .forms import CustomerSignUpForm, AllUsersCreateForm
 
 
@@ -47,10 +47,5 @@ class UserCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'users/user_form.html'
 
     def form_valid(self, form):
-        user_type_to_cls = {0: Customer, 1: Employee, 2: Manager, 3: Lead, }  # TODO: add admin
         user = form.save()
-
-        user_cls = user_type_to_cls[user.user_type]
-        user_cls.objects.create(user=user)
-
         return redirect(self.success_url)
