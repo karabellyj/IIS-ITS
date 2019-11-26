@@ -5,6 +5,9 @@
         {{ filter.form.as_p }}
         <input type="submit" />
     </form>
+    {% if perms.users.add_user %}
+        <a href="{% url 'users:user-create' %}" class="uk-button uk-button-default">Create user</a>
+    {% endif %}
     <ul>
     {% for object in object_list %}
         <li><a href="{% url 'users:user-detail' object.pk %}">{{ object.email }}</a></li>
