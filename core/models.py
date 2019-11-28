@@ -28,7 +28,7 @@ class Ticket(models.Model):
 
     class Meta:
         permissions = [
-            ('change_ticket_state', 'Can change the state of tickets'),
+            ('change_state_ticket', 'Can change the state of tickets'),
         ]
 
     def __str__(self):
