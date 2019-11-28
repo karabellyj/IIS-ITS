@@ -21,7 +21,7 @@ GROUPS_PERMISSIONS = {
     },
     'Managers': {
         # Customers permissions
-        models.Ticket: ['add', 'change', 'delete', 'view'],
+        models.Ticket: ['add', 'change', 'delete', 'view', 'change_ticket_state'],
         models.Comment: ['add', 'change', 'view'],
         models.Attachment: ['add', 'view', 'delete'],
 

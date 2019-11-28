@@ -26,6 +26,11 @@ class Ticket(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, related_name='tickets')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='tickets')
 
+    class Meta:
+        permissions = [
+            ('change_ticket_state', 'Can change the state of tickets'),
+        ]
+
     def __str__(self):
         return self.name
 
