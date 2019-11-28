@@ -54,35 +54,26 @@ class UserCreateView(PermissionRequiredMixin, CreateView):
         return redirect(self.success_url)
 
 
-class UserUpdateView(PermissionRequiredMixin, CreateView):
+class UserUpdateView(PermissionRequiredMixin, UpdateView):
     model = User
-    fields = ('first_name', 'last_name', 'user_type')
+    fields = ('email', 'first_name', 'last_name', 'user_type')
     success_url = reverse_lazy('users:user-list')
     permission_required = ('users.change_user',)
-
-    def get_initial(self):
-        initial = super().get_initial()
-        initial = initial.copy()
-
-        for field in self.fields:
-            initial[field] = getattr(self.get_object(), field)
-        return initial
 
     @transaction.atomic
     def form_valid(self, form):
         if 'user_type' in form.changed_data:
-            self.get_object().groups.clear()
-            group = Group.objects.get(name=get_user_group_by_type(self.get_object().user_type))
-            self.get_object().groups.add(group)
+            self.object.groups.clear()
+            group = Group.objects.get(name=get_user_group_by_type(self.object.user_type))
+            self.object.groups.add(group)
 
-            user_cls = get_user_class_by_type(self.get_object().user_type)
-            user_cls.objects.get(user=self.get_object()).delete()
+            user_cls = get_user_class_by_type(self.object.user_type)
+            user_cls.objects.get(user=self.object).delete()
 
             new_user_cls = get_user_class_by_type(form.cleaned_data['user_type'])
-            new_user_cls.objects.create(user=self.get_object())
+            new_user_cls.objects.create(user=self.object)
 
-        user = User.objects.get(pk=self.get_object().id)
-        user.save(update_fields=form.changed_data)
+        form.save()
 
         return redirect(self.success_url)
 
