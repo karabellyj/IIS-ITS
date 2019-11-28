@@ -2,8 +2,8 @@ from django.core.management import BaseCommand
 from django.contrib.auth.models import Group, Permission
 
 from core import models
+from users.models import User
 
-# TODO: add more groups
 GROUPS_PERMISSIONS = {
     'Customers': {
         models.Ticket: ['add', 'change', 'delete', 'view'],
@@ -18,6 +18,43 @@ GROUPS_PERMISSIONS = {
 
         # Employees permissions
         models.Task: ['change', 'view']
+    },
+    'Managers': {
+        # Customers permissions
+        models.Ticket: ['add', 'change', 'delete', 'view'],
+        models.Comment: ['add', 'change', 'view'],
+        models.Attachment: ['add', 'view', 'delete'],
+
+        # Employees permissions + Manager permissions
+        models.Task: ['add', 'change', 'view', 'delete'],
+        models.Product: ['view']
+    },
+    'Leads': {
+        # Customers permissions
+        models.Ticket: ['add', 'change', 'delete', 'view'],
+        models.Comment: ['add', 'change', 'view'],
+        models.Attachment: ['add', 'view', 'delete'],
+
+        # Employees permissions + Manager permissions
+        models.Task: ['add', 'change', 'view', 'delete'],
+
+        # Lead permissions
+        models.Product: ['add', 'change', 'view', 'delete']
+    },
+    'Admins': {
+        # Customers permissions
+        models.Ticket: ['add', 'change', 'delete', 'view'],
+        models.Comment: ['add', 'change', 'view'],
+        models.Attachment: ['add', 'view', 'delete'],
+
+        # Employees permissions + Manager permissions
+        models.Task: ['add', 'change', 'view', 'delete'],
+
+        # Lead permissions
+        models.Product: ['add', 'change', 'view', 'delete'],
+
+        # Admin permissions
+        User: ['add', 'change', 'view', 'delete']
     }
 }
 
