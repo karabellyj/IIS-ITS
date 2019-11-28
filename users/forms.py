@@ -2,7 +2,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import Group
 from django.db import transaction
 
-from .models import User, Customer, Employee, Manager, Lead
+from .utils import get_user_class_by_type, get_user_group_by_type
+from .models import User, Customer
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -43,12 +44,10 @@ class AllUsersCreateForm(UserCreationForm):
     def save(self):
         user = super().save()
 
-        user_type_to_cls = {0: Customer, 1: Employee, 2: Manager, 3: Lead, }  # TODO: add
-        user_type_to_group = {0: 'Customers', 1: 'Employees'}  # TODO: add all groups
-        user_cls = user_type_to_cls[user.user_type]
+        user_cls = get_user_class_by_type(user.user_type)
         user_cls.objects.create(user=user)
 
-        user_group = user_type_to_group[user.user_type]
+        user_group = get_user_group_by_type(user.user_type)
         group = Group.objects.get(name=user_group)
         user.groups.add(group)
 

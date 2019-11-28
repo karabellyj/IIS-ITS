@@ -1,14 +1,16 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import Group
+from django.db import transaction
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 
+from .utils import get_user_group_by_type, get_user_class_by_type
 from .filters import UserFilter
-from .models import User, Lead, Manager, Employee, Customer
+from .models import User
 from .forms import CustomerSignUpForm, AllUsersCreateForm
 
 
@@ -66,20 +68,17 @@ class UserUpdateView(PermissionRequiredMixin, CreateView):
             initial[field] = getattr(self.get_object(), field)
         return initial
 
+    @transaction.atomic
     def form_valid(self, form):
-        print('here')
         if 'user_type' in form.changed_data:
-            user_type_to_cls = {0: Customer, 1: Employee, 2: Manager, 3: Lead, }  # TODO: add
-            user_type_to_group = {0: 'Customers', 1: 'Employees'}  # TODO: add all groups
-
             self.get_object().groups.clear()
-            group = Group.objects.get(name=user_type_to_group[self.get_object().user_type])
+            group = Group.objects.get(name=get_user_group_by_type(self.get_object().user_type))
             self.get_object().groups.add(group)
 
-            user_cls = user_type_to_cls[self.get_object().user_type]
+            user_cls = get_user_class_by_type(self.get_object().user_type)
             user_cls.objects.get(user=self.get_object()).delete()
 
-            new_user_cls = user_type_to_cls[form.cleaned_data['user_type']]
+            new_user_cls = get_user_class_by_type(form.cleaned_data['user_type'])
             new_user_cls.objects.create(user=self.get_object())
 
         user = User.objects.get(pk=self.get_object().id)
