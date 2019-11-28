@@ -3,14 +3,15 @@
 {% block content %}
     <form action="" method="get">
         {{ filter.form.as_p }}
-        <input type="submit" />
+        <input type="submit"/>
     </form>
     <ul>
-    {% for task in object_list %}
-        <li><a href="{% url 'core:task-detail' task.pk %}">{{ task.description }} - {{ task.reported|time }}</a></li>
-    {% empty %}
-        <li>No tasks yet.</li>
-    {% endfor %}
+        {% for task in object_list %}
+            <li><a href="{% url 'core:task-detail' task.pk %}">{{ task.task_description }}
+                - {{ task.reported|default_if_none:'No time reported' }}</a></li>
+        {% empty %}
+            <li>No tasks yet.</li>
+        {% endfor %}
     </ul>
     {#    TODO: add pagination handling #}
 {% endblock %}

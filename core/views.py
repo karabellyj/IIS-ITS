@@ -94,7 +94,7 @@ class TaskListView(PermissionRequiredMixin, FilterView):
 
 class TaskCreateView(PermissionRequiredMixin, CreateView):
     model = Task
-    fields = ('description', 'state', 'estimated', 'employee',)
+    fields = ('task_description', 'state', 'estimated', 'employee',)
     success_url = reverse_lazy('core:task-list')
     permission_required = ('core.add_task',)
 

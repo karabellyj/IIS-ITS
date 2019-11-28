@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Task detail{% endblock %}
 {% block content %}
-    <h3>{{ object.description }}</h3>
+    <h3>{{ object.task_description }}</h3>
     <p>{{ object.state }}</p>
-    <p>Estimated {{ object.estimated|time }}</p>
-    <p>Reported {{ object.reported|time }}</p>
+    <p>{{ object.solution_description }}</p>
+    <p>Estimated {{ object.estimated }}</p>
+    <p>Reported {{ object.reported|default_if_none:'No time reported' }}</p>
 {% endblock %}
