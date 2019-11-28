@@ -48,7 +48,8 @@ class Attachment(models.Model):
 class Task(models.Model):
     STATE = Choices(('analysis', _('analysis')), ('resolving', _('resolving')), ('implementing', _('implementing')),
                     ('testing', _('testing')), ('done', _('done')))
-    description = models.CharField(max_length=255)
+    task_description = models.CharField(max_length=255)
+    solution_description = models.TextField()
     state = models.CharField(max_length=255, choices=STATE, default=STATE.analysis)
     estimated = models.DurationField()
     reported = models.DurationField(null=True, blank=True)
@@ -56,7 +57,7 @@ class Task(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='tasks')
 
     def __str__(self):
-        return self.description
+        return self.task_description
 
 
 class Product(MPTTModel):
