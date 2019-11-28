@@ -9,9 +9,13 @@
     <ul>
         {% recursetree object_list %}
             <li>
-                <a href="{% url 'core:product-detail' node.pk %}">{{ node.name }} <a
-                        href="{% url 'core:product-update' node.pk %}">&#x270E;</a> <a
-                        href="{% url 'core:product-delete' node.pk %}">&#x2717;</a></a>
+                <a href="{% url 'core:product-detail' node.pk %}">{{ node.name }}
+                    {% if perms.core.change_product %}
+                        <a href="{% url 'core:product-update' node.pk %}">&#x270E;</a>
+                    {% endif %}
+                    {% if perms.core.delete_product %}
+                        <a href="{% url 'core:product-delete' node.pk %}">&#x2717;</a></a>
+                    {% endif %}
                 {% if not node.is_leaf_node %}
                     <ul class="children">
                         {{ children }}
