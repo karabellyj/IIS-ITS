@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django_filters.views import FilterView
 
 from .filters import TicketFilter
@@ -55,6 +55,19 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
     fields = ('name', 'manager', 'parent',)
     success_url = reverse_lazy('core:product-list')
     permission_required = ('core.add_product',)
+
+
+class ProductUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Product
+    fields = ('name', 'manager', 'parent',)
+    success_url = reverse_lazy('core:product-list')
+    permission_required = ('core.change_product',)
+
+
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
+    model = Product
+    success_url = reverse_lazy('core:product-list')
+    permission_required = ('core.delete_product',)
 
 
 class ProductDetailView(PermissionRequiredMixin, DetailView):
