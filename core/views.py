@@ -36,10 +36,20 @@ class TicketUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView)
     model = Ticket
     fields = ('name', 'description', 'product')
     success_url = reverse_lazy('core:ticket-list')
-    permission_required = ('core.change_ticket',)  # TODO: only owner should be able to change
+    permission_required = ('core.change_ticket',)
 
     def test_func(self):
         return True if self.request.user == self.get_object().author else False
+
+
+class TicketStateUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Ticket
+    fields = ('state',)
+    success_url = reverse_lazy('core:ticket-list')
+    permission_required = ('core.change_state_ticket',)
+
+    def test_func(self):
+        return True if self.request.user == self.get_object().product.manager.user else False
 
 
 class ProductListView(PermissionRequiredMixin, FilterView):
