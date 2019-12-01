@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
 
+from .forms import CommentForm
 from .filters import TicketFilter
 from .models import Ticket, Product, Task, Comment, Attachment
 
@@ -143,9 +144,9 @@ class TaskDeleteView(PermissionRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 class CommentCreateView(PermissionRequiredMixin, CreateView):
-    model = Comment
-    fields = ('text', 'ticket', 'user')
+    form_class = CommentForm
     success_url = reverse_lazy('home')
+    template_name = 'core/comment_form.html'
     permission_required = ('core.add_comment',)
 
     def get_initial(self):
