@@ -19,6 +19,10 @@ class HomeView(TemplateView):
         return context
 
 
+class DashboardView(TemplateView):
+    template_name = 'dashboard.html'
+
+
 class TicketListView(FilterView):
     model = Ticket
     filterset_class = TicketFilter

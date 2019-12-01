@@ -4,6 +4,8 @@ from core import views
 
 app_name = "core"
 urlpatterns = [
+    path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
+
     path('tickets/', views.TicketListView.as_view(), name='ticket-list'),
     path('ticket/create/', views.TicketCreateView.as_view(), name='ticket-create'),
     path('ticket/<int:pk>/', views.TicketDetailView.as_view(), name='ticket-detail'),
