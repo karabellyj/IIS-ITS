@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'dashboard_base.html' %}
 {% load mptt_tags %}
 {% block title %}Products{% endblock %}
 {% block content %}
@@ -6,18 +6,32 @@
         {{ filter.form.as_p }}
         <input type="submit"/>
     </form>
-    <ul>
+    <ul class="uk-list uk-list-striped">
         {% recursetree object_list %}
             <li>
-                <a href="{% url 'core:product-detail' node.pk %}">{{ node.name }}
-                    {% if perms.core.change_product %}
-                        <a href="{% url 'core:product-update' node.pk %}">&#x270E;</a>
-                    {% endif %}
-                    {% if perms.core.delete_product %}
-                        <a href="{% url 'core:product-delete' node.pk %}">&#x2717;</a></a>
-                    {% endif %}
+                <div class="uk-grid">
+                    <div class="uk-width-auto">
+                        <p>{{ node.name }}</p>
+                    </div>
+                    <div class="uk-width-expand uk-flex-inline uk-flex-right">
+                        {% if perms.core.change_product %}
+                            <div>
+                                <a class="uk-button uk-button-primary"
+                                   href="{% url 'core:product-update' node.pk %}">Update</a>
+                            </div>
+                        {% endif %}
+                        {% if perms.core.delete_product %}
+                            <div>
+                                <a class="uk-button uk-button-danger"
+                                   href="{% url 'core:product-delete' node.pk %}">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
                 {% if not node.is_leaf_node %}
-                    <ul class="children">
+                    <ul class="uk-list uk-list-striped children">
                         {{ children }}
                     </ul>
                 {% endif %}

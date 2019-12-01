@@ -19,8 +19,11 @@ class HomeView(TemplateView):
         return context
 
 
-class DashboardView(TemplateView):
+class DashboardView(UserPassesTestMixin, TemplateView):
     template_name = 'dashboard.html'
+
+    def test_func(self):
+        return True if self.request.user.is_authenticated and self.request.user.user_type > 0 else False
 
 
 class TicketListView(FilterView):
