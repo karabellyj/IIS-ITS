@@ -21,6 +21,9 @@
             <div class="uk-width-auto">
                 <ul class="uk-subnav uk-subnav-divider" data-uk-margin>
                     {% if user.is_authenticated %}
+                        {% if user.user_type > 0 %}
+                            <li><a href="{% url 'core:ticket-list' %}">Dashboard</a></li>
+                        {% endif %}
                         <li>Hi {{ user.email }}</li>
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
