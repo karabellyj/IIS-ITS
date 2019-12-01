@@ -47,6 +47,7 @@ class TicketUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView)
     fields = ('name', 'description', 'product')
     success_url = reverse_lazy('core:ticket-list')
     permission_required = ('core.change_ticket',)
+    template_name = 'core/ticket_update_form.html'
 
     def test_func(self):
         return True if self.request.user == self.get_object().author else False
