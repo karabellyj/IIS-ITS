@@ -5,7 +5,7 @@ from model_utils import Choices
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
-from users.models import Employee, Manager
+from users.models import Employee, Manager, User
 
 
 class Comment(models.Model):
@@ -55,6 +55,7 @@ class Task(models.Model):
     reported = models.DurationField(null=True, blank=True)
 
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='tasks')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_tasks')
 
     def __str__(self):
         return self.task_description
