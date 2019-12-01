@@ -28,8 +28,9 @@
                 </form>
             </div>
             <div class="uk-width-auto">
-                <ul class="uk-subnav" data-uk-margin>
-                    <li class="uk-visible@s"><a href="#">Home</a></li>
+                <ul class="uk-subnav uk-subnav-divider" data-uk-margin>
+                    <li><a class="" href="{% url 'login' %}">login</a></li>
+                    <li><a class="" href="{% url 'signup' %}">signup</a></li>
                 </ul>
             </div>
         </div>
@@ -52,29 +53,31 @@
                 <!-- card -->
                 <div class="{{ ticket.state }}-card"
                      data-tags="{{ ticket.name|lower }} - {{ ticket.description|lower|truncatewords:50 }}">
-                    <div class="uk-card uk-card-small uk-card-default">
-                        <div class="uk-card-header">
-                            <div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
-                                <div class="uk-width-expand">
-                                    <span class="cat-txt">{{ ticket.state }}</span>
+                    <a class="uk-link-reset" href="{% url 'core:ticket-detail' ticket.pk %}">
+                        <div class="uk-card uk-card-small uk-card-default">
+                            <div class="uk-card-header">
+                                <div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
+                                    <div class="uk-width-expand">
+                                        <span class="cat-txt">{{ ticket.state }}</span>
+                                    </div>
+                                    <div class="uk-width-auto uk-text-right uk-text-muted">
+                                        <span data-uk-icon="icon:clock; ratio: 0.8"></span> {{ ticket.created|date }}
+                                    </div>
                                 </div>
-                                <div class="uk-width-auto uk-text-right uk-text-muted">
-                                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> {{ ticket.created|date }}
+                            </div>
+                            <div class="uk-card-body">
+                                <h6 class="uk-margin-small-bottom uk-margin-remove-adjacent uk-text-bold">{{ ticket.name }}</h6>
+                                <p class="uk-text-small uk-text-muted">{{ ticket.description|truncatewords:50 }}</p>
+                            </div>
+                            <div class="uk-card-footer">
+                                <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
+                                    <div class="uk-width-expand uk-text-small">
+                                        <span uk-icon="user"></span> {{ ticket.author.get_full_name }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="uk-card-body">
-                            <h6 class="uk-margin-small-bottom uk-margin-remove-adjacent uk-text-bold">{{ ticket.name }}</h6>
-                            <p class="uk-text-small uk-text-muted">{{ ticket.description|truncatewords:50 }}</p>
-                        </div>
-                        <div class="uk-card-footer">
-                            <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
-                                <div class="uk-width-expand uk-text-small">
-                                    <span uk-icon="user"></span> {{ ticket.author.get_full_name }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <!-- /card -->
 
