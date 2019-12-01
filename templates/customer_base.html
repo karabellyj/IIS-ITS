@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cards.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<!--HEADER-->
+<header id="site-head">
+    <div class="uk-container uk-container-expand">
+        <div class="uk-grid uk-grid-medium uk-flex uk-flex-middle" data-uk-grid>
+            <div class="uk-width-auto">
+                <a href="#" class="uk-logo" title="">Logo</a>
+            </div>
+            <div class="uk-width-expand">
+            </div>
+            <div class="uk-width-auto">
+                <ul class="uk-subnav uk-subnav-divider" data-uk-margin>
+                    {% if user.is_authenticated %}
+                        <li>Hi {{ user.email }}</li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a class="" href="{% url 'login' %}">login</a></li>
+                        <li><a class="" href="{% url 'signup' %}">signup</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<!--/HEADER-->
+<div class="spacer"></div>
+{% block content %}{% endblock %}
+
+<script src="{% static 'js/uikit.min.js' %}"></script>
+<script src="{% static 'js/uikit-icons.min.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>
