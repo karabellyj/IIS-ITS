@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
 
-from .forms import CommentForm
+from .forms import CommentForm, AttachmentForm
 from .filters import TicketFilter
 from .models import Ticket, Product, Task, Comment, Attachment
 
@@ -159,8 +159,8 @@ class CommentCreateView(PermissionRequiredMixin, CreateView):
 
 
 class AttachmentCreateView(PermissionRequiredMixin, UserPassesTestMixin, CreateView):
-    model = Attachment
-    fields = ('name', 'image', 'ticket',)
+    form_class = AttachmentForm
+    template_name = 'core/attachment_form.html'
     success_url = reverse_lazy('home')
     permission_required = ('core.add_attachment',)
 

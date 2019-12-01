@@ -1,8 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'customer_base.html' %}
 {% block title %}Create attachment{% endblock %}
 {% block content %}
-    <form method="post" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
-        <button class="uk-button uk-button-primary" type="submit">Submit</button>
-    </form>
+    <div class="uk-container uk-container-small">
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            {{ form.as_p }}
+            <button class="uk-button uk-button-primary" type="submit">Submit</button>
+        </form>
+    </div>
 {% endblock %}

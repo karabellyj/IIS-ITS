@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Comment
+from .models import Comment, Attachment
 
 
 class CommentForm(forms.ModelForm):
@@ -11,4 +11,14 @@ class CommentForm(forms.ModelForm):
             'text': forms.Textarea(attrs={'class': 'uk-textarea'}),
             'ticket': forms.HiddenInput,
             'user': forms.HiddenInput
+        }
+
+
+class AttachmentForm(forms.ModelForm):
+    class Meta:
+        model = Attachment
+        fields = ('name', 'image', 'ticket',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'uk-input'}),
+            'ticket': forms.HiddenInput,
         }
