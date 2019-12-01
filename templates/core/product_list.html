@@ -15,16 +15,12 @@
                     </div>
                     <div class="uk-width-expand uk-flex-inline uk-flex-right">
                         {% if perms.core.change_product %}
-                            <div>
-                                <a class="uk-button uk-button-primary"
-                                   href="{% url 'core:product-update' node.pk %}">Update</a>
-                            </div>
+                            <a class="uk-button uk-button-primary"
+                               href="{% url 'core:product-update' node.pk %}">Update</a>
                         {% endif %}
                         {% if perms.core.delete_product %}
-                            <div>
-                                <a class="uk-button uk-button-danger"
-                                   href="{% url 'core:product-delete' node.pk %}">Delete</a>
-                            </div>
+                            <a class="uk-button uk-button-danger uk-margin-left"
+                               href="{% url 'core:product-delete' node.pk %}">Delete</a>
                         {% endif %}
                     </div>
 
