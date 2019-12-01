@@ -94,14 +94,41 @@ class TaskListView(PermissionRequiredMixin, FilterView):
 
 class TaskCreateView(PermissionRequiredMixin, CreateView):
     model = Task
-    fields = ('task_description', 'state', 'estimated', 'employee',)
+    fields = ('task_description', 'state', 'estimated', 'employee', 'created_by',)
     success_url = reverse_lazy('core:task-list')
     permission_required = ('core.add_task',)
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial = initial.copy()
+        initial['created_by'] = self.request.user.pk
+        return initial
 
-class TaskDetailView(PermissionRequiredMixin, DetailView):
+
+class TaskDetailView(PermissionRequiredMixin, UserPassesTestMixin, DetailView):
     model = Task
     permission_required = ('core.view_task',)
+
+    def test_func(self):
+        return True if self.request.user == self.get_object().employee.user or self.request.user == self.get_object().created_by else False
+
+
+class TaskUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Task
+    fields = ('solution_description', 'state', 'reported',)
+    permission_required = ('core.change_task',)
+
+    def test_func(self):
+        return True if self.request.user == self.get_object().employee.user or self.request.user == self.get_object().created_by else False
+
+
+class TaskDeleteView(PermissionRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Task
+    success_url = reverse_lazy('core:task-list')
+    permission_required = ('core.delete_task',)
+
+    def test_func(self):
+        return True if self.request.user == self.get_object().created_by else False
 
 
 class CommentCreateView(PermissionRequiredMixin, CreateView):

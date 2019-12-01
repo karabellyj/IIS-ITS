@@ -7,8 +7,16 @@
     </form>
     <ul>
         {% for task in object_list %}
-            <li><a href="{% url 'core:task-detail' task.pk %}">{{ task.task_description }}
-                - {{ task.reported|default_if_none:'No time reported' }}</a></li>
+            <li>
+                <a href="{% url 'core:task-detail' task.pk %}">{{ task.task_description }}
+                    - {{ task.reported|default_if_none:'No time reported' }}</a>
+                {% if perms.core.change_task %}
+                    <a href="{% url 'core:task-update' task.pk %}">&#x270E;</a>
+                {% endif %}
+                {% if perms.core.delete_task %}
+                    <a href="{% url 'core:task-delete' task.pk %}">&#x2717;</a>
+                {% endif %}
+            </li>
         {% empty %}
             <li>No tasks yet.</li>
         {% endfor %}
