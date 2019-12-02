@@ -105,3 +105,14 @@ class UpdateUserForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'class': 'uk-input'}),
             'user_type': forms.Select(attrs={'class': 'uk-select'})
         }
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name')
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'uk-input'}),
+            'first_name': forms.TextInput(attrs={'class': 'uk-input'}),
+            'last_name': forms.TextInput(attrs={'class': 'uk-input'}),
+        }

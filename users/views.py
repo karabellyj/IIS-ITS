@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import Group
 from django.db import transaction
 from django.shortcuts import redirect
@@ -8,10 +8,10 @@ from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 
-from .utils import get_user_group_by_type, get_user_class_by_type
 from .filters import UserFilter
+from .forms import CustomerSignUpForm, AllUsersCreateForm, UpdateUserForm, ProfileForm
 from .models import User
-from .forms import CustomerSignUpForm, AllUsersCreateForm, UpdateUserForm
+from .utils import get_user_group_by_type, get_user_class_by_type
 
 
 class SignUpView(CreateView):
@@ -83,3 +83,20 @@ class UserDeleteView(PermissionRequiredMixin, DeleteView):
     success_url = reverse_lazy('users:user-list')
     context_object_name = 'user_object'
     permission_required = ('users.delete_user',)
+
+
+class UserProfileView(UserPassesTestMixin, UpdateView):
+    model = User
+    form_class = ProfileForm
+
+    def test_func(self):
+        return True if self.request.user.is_authenticated else False
+
+    def get_success_url(self):
+        return reverse_lazy('core:dashboard') if self.request.user.user_type > 0 else reverse_lazy('home')
+
+    def get_template_names(self):
+        return ['users/user_form.html'] if self.request.user.user_type > 0 else ['users/profile.html']
+
+    def get_object(self, queryset=None):
+        return self.request.user

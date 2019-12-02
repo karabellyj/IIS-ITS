@@ -22,7 +22,8 @@
             </div>
             <div class="uk-navbar-right">
                 <ul class="uk-navbar-nav">
-                    <li><a href="#" data-uk-icon="icon:user" title="Your profile" data-uk-tooltip></a></li>
+                    <li><a href="{% url 'users:user-profile' %}" data-uk-icon="icon:user" title="Your profile"
+                           data-uk-tooltip></a></li>
                     <li><a href="{% url 'logout' %}" data-uk-icon="icon:  sign-out" title="Sign Out"
                            data-uk-tooltip></a></li>
                 </ul>
@@ -104,7 +105,8 @@
                    data-uk-tooltip></a>
             </li>
             <li>
-                <a href="#" data-uk-icon="icon:user" title="Your profile" data-uk-tooltip></a>
+                <a href="{% url 'users:user-profile' %}" data-uk-icon="icon:user" title="Your profile"
+                   data-uk-tooltip></a>
             </li>
             <li>
                 <a href="{% url 'logout' %}" class="uk-icon-link" data-uk-tooltip="Sign out"
