@@ -33,7 +33,7 @@ class AddTaskForm(forms.ModelForm):
         widgets = {
             'task_description': forms.TextInput(attrs={'class': 'uk-input'}),
             'state': forms.Select(attrs={'class': 'uk-select'}),
-            'estimated': forms.TimeInput(attrs={'class': 'uk-input', 'type': 'time'}),
+            'estimated': forms.TimeInput(attrs={'class': 'uk-input', 'placeholder': 'hh:mm:ss'}),
             'employee': forms.Select(attrs={'class': 'uk-select'}),
             'created_by': forms.HiddenInput
         }
