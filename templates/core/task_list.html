@@ -14,9 +14,11 @@
                             - {{ task.reported|default_if_none:'No time reported' }}</a>
                     </div>
                     <div class="uk-width-expand uk-flex-inline uk-flex-right">
-                        {% if perms.core.change_task and user == task.employee.user %}
-                            <a class="uk-button uk-button-primary"
-                               href="{% url 'core:task-update' task.pk %}">Update</a>
+                        {% if perms.core.change_task %}
+                            {% if user == task.employee.user or user == task.created_by %}
+                                <a class="uk-button uk-button-primary"
+                                   href="{% url 'core:task-update' task.pk %}">Update</a>
+                            {% endif %}
                         {% endif %}
                         {% if perms.core.delete_task and user == task.created_by %}
                             <a class="uk-button uk-button-danger uk-margin-left"

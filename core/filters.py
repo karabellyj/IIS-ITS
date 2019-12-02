@@ -1,6 +1,6 @@
 from django_filters import FilterSet
 
-from .models import Ticket, Task
+from .models import Ticket, Task, Product
 
 
 class TicketFilter(FilterSet):
@@ -18,4 +18,12 @@ class TaskFilter(FilterSet):
         fields = {
             'task_description': ['icontains'],
             'state': ['exact']
+        }
+
+
+class ProductFilter(FilterSet):
+    class Meta:
+        model = Product
+        fields = {
+            'name': ['icontains']
         }

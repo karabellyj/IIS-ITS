@@ -1,6 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'dashboard_base.html' %}
 {% block title %}Product detail{% endblock %}
 {% block content %}
-    <h1>{{ object.name }}</h1>
-    <p>Managed by {{ object.manager }}</p>
+    <div class="uk-container uk-container-small">
+        <h1>{{ object.name }}</h1>
+        <p>Managed by {{ object.manager }}</p>
+    </div>
 {% endblock %}

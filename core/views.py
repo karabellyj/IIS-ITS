@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
 
-from .filters import TicketFilter, TaskFilter
+from .filters import TicketFilter, TaskFilter, ProductFilter
 from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm, AddTaskForm, UpdateTaskForm
 from .models import Ticket, Product, Task
 
@@ -74,7 +74,7 @@ class TicketStateUpdateView(PermissionRequiredMixin, UserPassesTestMixin, Update
 class ProductListView(PermissionRequiredMixin, FilterView):
     model = Product
     paginate_by = 25
-    filterset_fields = ('name',)
+    filterset_class = ProductFilter
     template_name = 'core/product_list.html'
     permission_required = ('core.view_product',)
 
