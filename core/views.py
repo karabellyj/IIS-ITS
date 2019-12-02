@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
 
-from .forms import CommentForm, AttachmentForm
 from .filters import TicketFilter
-from .models import Ticket, Product, Task, Comment, Attachment
+from .forms import CommentForm, AttachmentForm, AddTicketForm
+from .models import Ticket, Product, Task
 
 
 class HomeView(TemplateView):
@@ -34,8 +34,8 @@ class TicketListView(FilterView):
 
 
 class TicketCreateView(PermissionRequiredMixin, CreateView):
-    model = Ticket
-    fields = ('name', 'description', 'product', 'author',)
+    form_class = AddTicketForm
+    template_name = 'core/ticket_form.html'
     success_url = reverse_lazy('core:ticket-list')
     permission_required = ('core.add_ticket',)
 

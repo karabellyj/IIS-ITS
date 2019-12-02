@@ -1,6 +1,18 @@
 from django import forms
 
-from .models import Comment, Attachment
+from .models import Comment, Attachment, Ticket
+
+
+class AddTicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ('name', 'description', 'product', 'author',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'uk-input'}),
+            'description': forms.Textarea(attrs={'class': 'uk-textarea'}),
+            'product': forms.Select(attrs={'class': 'uk-select'}),
+            'author': forms.HiddenInput,
+        }
 
 
 class CommentForm(forms.ModelForm):
