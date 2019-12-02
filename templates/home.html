@@ -31,6 +31,7 @@
                 <ul class="uk-subnav uk-subnav-divider" data-uk-margin>
                     {% if user.is_authenticated %}
                         <li>Hi {{ user.email }}</li>
+                        <li><a href="{% url 'core:ticket-create' %}">Create Ticket</a></li>
                         {% if user.user_type > 0 %}
                             <li><a href="{% url 'core:dashboard' %}">Dashboard</a></li>
                         {% endif %}
