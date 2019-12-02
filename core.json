@@ -1,0 +1,137 @@
+[
+  {
+    "model": "core.comment",
+    "pk": 1,
+    "fields": {
+      "text": "Great ticket",
+      "user": 10,
+      "ticket": 8
+    }
+  },
+  {
+    "model": "core.ticket",
+    "pk": 5,
+    "fields": {
+      "name": "First ticket",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sem mauris, lacinia eu ipsum sed, suscipit venenatis risus. Nam a viverra neque. Integer sodales diam volutpat nibh pharetra, sed sodales sem tincidunt. Nam magna arcu, rutrum sed dignissim quis, faucibus sed ante. Vestibulum eu placerat libero. Etiam feugiat, odio in fermentum dignissim, sem diam tincidunt quam, quis tincidunt nisi lectus et lacus. Donec vel porttitor magna, quis euismod purus. Nulla nulla sem, tincidunt sed ipsum ac, sodales blandit augue. Vivamus lacinia metus sit amet orci consectetur, eget pellentesque metus porta.",
+      "state": "rejected",
+      "created": "2019-12-02T13:04:39.571",
+      "product": 6,
+      "author": 7
+    }
+  },
+  {
+    "model": "core.ticket",
+    "pk": 6,
+    "fields": {
+      "name": "Another ticket",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nunc tellus, finibus sit amet lacinia vitae, venenatis nec orci. Sed at odio dignissim, sollicitudin orci vel, bibendum metus. Quisque ultricies erat a mauris pharetra faucibus. Donec eget dignissim purus. Proin dapibus sodales lacinia. Phasellus in urna libero. Maecenas tempor semper lorem vitae accumsan.\r\n\r\nDonec nec ipsum ipsum. Cras tincidunt rutrum neque id cursus. Sed viverra vehicula eros, quis iaculis sem. Nunc bibendum, ligula posuere congue vehicula, dolor libero egestas dui, eget porta elit diam a magna. In nunc justo, sagittis sit amet nisi dictum, fringilla finibus justo. Aliquam in efficitur nunc. Ut at tincidunt nisi, vitae congue nisl. Fusce a lectus et elit ultrices egestas. Suspendisse potenti. Sed in pellentesque.",
+      "state": "done",
+      "created": "2019-12-02T13:05:29.768",
+      "product": 7,
+      "author": 7
+    }
+  },
+  {
+    "model": "core.ticket",
+    "pk": 7,
+    "fields": {
+      "name": "Look, ticket!",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla faucibus, urna mollis tincidunt finibus, sem felis blandit nisi, nec rutrum nunc eros in leo. Maecenas ut ultricies urna. Donec orci justo, commodo vel lectus lobortis, varius interdum turpis. Curabitur scelerisque pharetra diam ac sodales. Suspendisse rutrum efficitur aliquet. Etiam at blandit turpis. Integer nec libero scelerisque, eleifend turpis eget, eleifend diam. Nunc lacinia, mauris vel pretium vulputate, mauris eros efficitur elit, hendrerit aliquam quam tortor id est. Suspendisse ut libero ac elit finibus varius commodo eu ante. Praesent eros est, malesuada placerat leo sit amet, molestie vehicula lorem. Morbi in quam nunc.\r\n\r\nEtiam dolor erat, consequat vulputate sem sed, tristique consectetur justo. Suspendisse tincidunt malesuada ligula ac feugiat. Nulla facilisi. Sed et venenatis dolor. Pellentesque metus libero, aliquam quis blandit vel, tempus ut elit. Vestibulum condimentum purus condimentum metus iaculis fringilla. Mauris non nunc ut erat iaculis pretium. Vestibulum placerat.",
+      "state": "resolving",
+      "created": "2019-12-02T13:07:29.210",
+      "product": 8,
+      "author": 8
+    }
+  },
+  {
+    "model": "core.ticket",
+    "pk": 8,
+    "fields": {
+      "name": "Wow ticket",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla faucibus, urna mollis tincidunt finibus, sem felis blandit nisi, nec rutrum nunc eros in leo. Maecenas ut ultricies urna. Donec orci justo, commodo vel lectus lobortis, varius interdum turpis. Curabitur scelerisque pharetra diam ac sodales. Suspendisse rutrum efficitur aliquet. Etiam at blandit turpis. Integer nec libero scelerisque, eleifend turpis eget, eleifend diam. Nunc lacinia, mauris vel pretium vulputate, mauris eros efficitur elit, hendrerit aliquam quam tortor id est. Suspendisse ut libero ac elit finibus varius commodo eu ante. Praesent eros est, malesuada placerat leo sit amet, molestie vehicula lorem. Morbi in quam nunc.\r\n\r\nEtiam dolor erat, consequat vulputate sem sed, tristique consectetur justo. Suspendisse tincidunt malesuada ligula ac feugiat. Nulla facilisi. Sed et venenatis dolor. Pellentesque metus libero, aliquam quis blandit vel, tempus ut elit. Vestibulum condimentum purus condimentum metus iaculis fringilla. Mauris non nunc ut erat iaculis pretium. Vestibulum placerat.",
+      "state": "pending",
+      "created": "2019-12-02T13:07:55.355",
+      "product": 7,
+      "author": 8
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 1,
+    "fields": {
+      "task_description": "Look at first ticket",
+      "solution_description": "",
+      "state": "analysis",
+      "estimated": "12:00:00",
+      "reported": null,
+      "employee": 6,
+      "created_by": 12
+    }
+  },
+  {
+    "model": "core.task",
+    "pk": 2,
+    "fields": {
+      "task_description": "Task for ticket",
+      "solution_description": "",
+      "state": "analysis",
+      "estimated": "08:00:00",
+      "reported": null,
+      "employee": 11,
+      "created_by": 10
+    }
+  },
+  {
+    "model": "core.product",
+    "pk": 5,
+    "fields": {
+      "name": "Cool product",
+      "parent": null,
+      "manager": 12,
+      "lft": 1,
+      "rght": 4,
+      "tree_id": 1,
+      "level": 0
+    }
+  },
+  {
+    "model": "core.product",
+    "pk": 6,
+    "fields": {
+      "name": "Main product",
+      "parent": null,
+      "manager": 10,
+      "lft": 1,
+      "rght": 4,
+      "tree_id": 2,
+      "level": 0
+    }
+  },
+  {
+    "model": "core.product",
+    "pk": 7,
+    "fields": {
+      "name": "Awesome subproduct",
+      "parent": 5,
+      "manager": 10,
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 1,
+      "level": 1
+    }
+  },
+  {
+    "model": "core.product",
+    "pk": 8,
+    "fields": {
+      "name": "Main subproduct",
+      "parent": 6,
+      "manager": 12,
+      "lft": 2,
+      "rght": 3,
+      "tree_id": 2,
+      "level": 1
+    }
+  }
+]

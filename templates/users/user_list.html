@@ -3,7 +3,8 @@
 {% block content %}
     <form action="" method="get">
         {{ filter.form.as_p }}
-        <input type="submit"/>
+        <a class="uk-button uk-button-secondary" href="{% url 'users:user-list' %}">Reset</a>
+        <input class="uk-button uk-button-primary" type="submit"/>
     </form>
     <ul class="uk-list uk-list-striped">
         {% for object in object_list %}

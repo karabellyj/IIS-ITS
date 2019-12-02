@@ -50,7 +50,7 @@
 	font-size: 0.75rem;
 	letter-spacing: 0.01em;
 }
-.nature-card .uk-card {
+.resolving-card .uk-card {
 	border-top-color: #1E87F0;
 }
 .uk-subnav li a {
@@ -65,25 +65,25 @@
 .uk-subnav li.uk-active:nth-child(5) a {
 	background-color:#E84DF0;
 }
-.nature-card .uk-card .cat-txt {
+.resolving-card .uk-card .cat-txt {
 	color: #1E87F0;
 }
-.music-card .uk-card {
+.pending-card .uk-card {
 	border-top-color: #8630F0;
 }
-.music-card .uk-card .cat-txt {
+.pending-card .uk-card .cat-txt {
 	color: #8630F0;
 }
-.design-card .uk-card {
+.rejected-card .uk-card {
 	border-top-color: #E84DF0;
 }
-.design-card .uk-card .cat-txt {
+.rejected-card .uk-card .cat-txt {
 	color: #E84DF0;
 }
-.photo-card .uk-card {
+.done-card .uk-card {
 	border-top-color: #F03A7F;
 }
-.photo-card .uk-card .cat-txt {
+.done-card .uk-card .cat-txt {
 	color: #F03A7F;
 }
 .uk-card .uk-overlay-primary {

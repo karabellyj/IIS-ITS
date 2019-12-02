@@ -23,6 +23,16 @@ class HomeView(TemplateView):
         return context
 
 
+class MyTicketListView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tickets'] = Ticket.objects.select_related('author').filter(author=self.request.user).all()
+        context['STATES'] = Ticket.STATE
+        return context
+
+
 class DashboardView(UserPassesTestMixin, TemplateView):
     template_name = 'dashboard.html'
 
@@ -154,12 +164,10 @@ class TaskCreateView(PermissionRequiredMixin, CreateView):
         return initial
 
 
-class TaskDetailView(PermissionRequiredMixin, UserPassesTestMixin, DetailView):
+class TaskDetailView(PermissionRequiredMixin, DetailView):
     model = Task
     permission_required = ('core.view_task',)
 
-    def test_func(self):
-        return True if self.request.user == self.get_object().employee.user or self.request.user == self.get_object().created_by else False
 
 
 class TaskUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):

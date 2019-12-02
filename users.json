@@ -1,0 +1,195 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$12XXhtdnnhiJ$ZWtXGEWtZMDpU3UaHR3B83A4OxkuLn9VQEZOcgLXJ2Y=",
+      "last_login": "2019-12-02T12:59:29.349",
+      "is_superuser": true,
+      "email": "admin@example.com",
+      "first_name": "Admin",
+      "last_name": "Adminovi\u010d",
+      "date_joined": "2019-12-02T12:18:03.097",
+      "is_active": true,
+      "is_staff": true,
+      "user_type": 4,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$N4be874oG9JO$nZzNl5MHEfVxFxV8yeh7VCxlZ0/bJz2a/ck58PnJKYk=",
+      "last_login": "2019-12-02T12:59:14.887",
+      "is_superuser": false,
+      "email": "employee2@example.com",
+      "first_name": "Asa",
+      "last_name": "Dominguez",
+      "date_joined": "2019-12-02T12:25:02.740",
+      "is_active": true,
+      "is_staff": false,
+      "user_type": 1,
+      "groups": [
+        2
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$qGpDjLfB6m9M$csHj0p0VtaI/kI5fBVYnXTMEb/SilFkWy1WyFMe3q9U=",
+      "last_login": "2019-12-02T13:04:30.847",
+      "is_superuser": false,
+      "email": "customer1@example.com",
+      "first_name": "Mathias",
+      "last_name": "Holman",
+      "date_joined": "2019-12-02T12:27:04.788",
+      "is_active": true,
+      "is_staff": false,
+      "user_type": 0,
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$VWN9qDYcCNwf$Wfk5svWVcAVvwC/OJHP8aPuiVKvucUlBkI0uDS6GXkk=",
+      "last_login": "2019-12-02T13:05:47.628",
+      "is_superuser": false,
+      "email": "customer2@example.com",
+      "first_name": "Bryson",
+      "last_name": "Herrera",
+      "date_joined": "2019-12-02T12:28:19.799",
+      "is_active": true,
+      "is_staff": false,
+      "user_type": 0,
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$Urw7gb9aXIzi$uzu5uXJ0AN7YSTDUXSy3dhUn+ghyWzMbjcB8vVY/ak4=",
+      "last_login": "2019-12-02T13:03:19.225",
+      "is_superuser": false,
+      "email": "lead@example.com",
+      "first_name": "Lea",
+      "last_name": "Austin",
+      "date_joined": "2019-12-02T12:37:59.063",
+      "is_active": true,
+      "is_staff": false,
+      "user_type": 3,
+      "groups": [
+        4
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$7E4Ap8WTRHla$BkbChln+Y3z1U+My5r/flIIkik95Ff5CiVO+hdMffc0=",
+      "last_login": "2019-12-02T13:10:27.197",
+      "is_superuser": false,
+      "email": "manager2@example.com",
+      "first_name": "Morgan",
+      "last_name": "Snow",
+      "date_joined": "2019-12-02T13:00:20.695",
+      "is_active": true,
+      "is_staff": false,
+      "user_type": 2,
+      "groups": [
+        3
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$ObF9DqhHCjFA$MaHgiEjI/90nifGMNIcLWSCpN1nOgeqmO2pRbmvgZo8=",
+      "last_login": "2019-12-02T13:02:06.277",
+      "is_superuser": false,
+      "email": "employee1@example.com",
+      "first_name": "Diane",
+      "last_name": "Butt",
+      "date_joined": "2019-12-02T13:00:53.435",
+      "is_active": true,
+      "is_staff": false,
+      "user_type": 1,
+      "groups": [
+        2
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$nxaLxVvfPnCb$hGqviUiJf2RQYFWv7xmAkNhoJiPdMIvMnN7wADYkByw=",
+      "last_login": "2019-12-02T13:08:33.631",
+      "is_superuser": false,
+      "email": "manager1@example.com",
+      "first_name": "Homer",
+      "last_name": "Mendoza",
+      "date_joined": "2019-12-02T13:01:27.597",
+      "is_active": true,
+      "is_staff": false,
+      "user_type": 2,
+      "groups": [
+        3
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customer",
+    "pk": 7,
+    "fields": {}
+  },
+  {
+    "model": "users.customer",
+    "pk": 8,
+    "fields": {}
+  },
+  {
+    "model": "users.employee",
+    "pk": 6,
+    "fields": {}
+  },
+  {
+    "model": "users.employee",
+    "pk": 11,
+    "fields": {}
+  },
+  {
+    "model": "users.manager",
+    "pk": 10,
+    "fields": {}
+  },
+  {
+    "model": "users.manager",
+    "pk": 12,
+    "fields": {}
+  },
+  {
+    "model": "users.lead",
+    "pk": 9,
+    "fields": {}
+  }
+]
