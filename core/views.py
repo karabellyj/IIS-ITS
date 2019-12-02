@@ -1,9 +1,12 @@
+from datetime import datetime, timedelta
+
 from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
 
+from users.models import User
 from .filters import TicketFilter, TaskFilter, ProductFilter
 from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm, AddTaskForm, UpdateTaskForm, \
     UpdateStateTicketForm
@@ -25,6 +28,26 @@ class DashboardView(UserPassesTestMixin, TemplateView):
 
     def test_func(self):
         return True if self.request.user.is_authenticated and self.request.user.user_type > 0 else False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.user_type == User.USER_TYPES.employee:
+            context['number_of_unfinished_tasks'] = Task.objects.filter(employee__user=self.request.user).exclude(
+                state=Task.STATE.done).count()
+        if self.request.user.user_type == User.USER_TYPES.manager:
+            context['number_of_assigned_unfinished_tasks'] = Task.objects.filter(created_by=self.request.user).exclude(
+                state=Task.STATE.done).count()
+            context['number_of_unresolved_tickets'] = Ticket.objects.filter(
+                product__manager__user=self.request.user).exclude(
+                state__in=[Ticket.STATE.rejected, Ticket.STATE.done]
+            ).count()
+        one_week_ago = datetime.today() - timedelta(days=7)
+        if self.request.user.user_type == User.USER_TYPES.lead or self.request.user.user_type == User.USER_TYPES.admin:
+            context['number_of_new_tickets_this_week'] = Ticket.objects.filter(created__gte=one_week_ago).count()
+        if self.request.user.user_type == User.USER_TYPES.admin:
+            context['number_of_new_customers_this_week'] = User.objects.filter(user_type=User.USER_TYPES.customer,
+                                                                               date_joined__gte=one_week_ago).count()
+        return context
 
 
 class TicketListView(FilterView):
