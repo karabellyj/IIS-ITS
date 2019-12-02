@@ -27,6 +27,33 @@
                 {% endif %}
             </div>
             <div class="uk-margin-small">
+                <div class="uk-inline uk-width-1-1 {% if form.last_name.errors %}uk-form-danger{% endif %}">
+                    <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
+                    {{ form.last_name }}
+                </div>
+                {% if form.last_name.errors %}
+                    {% for error in form.last_name.errors %}
+                        {% if forloop.first %}
+                            {{ error }}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="uk-margin-small">
+                <div class="uk-inline uk-width-1-1 {% if form.first_name.errors %}uk-form-danger{% endif %}">
+                    <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
+                    {{ form.first_name }}
+                </div>
+                {% if form.first_name.errors %}
+                    {% for error in form.first_name.errors %}
+                        {% if forloop.first %}
+                            {{ error }}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="uk-margin-small">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
                     {{ form.password1 }}

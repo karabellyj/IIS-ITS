@@ -25,20 +25,23 @@ class CustomerSignUpForm(UserCreationForm):
     password1 = forms.CharField(
         label=_("Password"),
         strip=False,
-        widget=forms.PasswordInput(attrs={'class': 'uk-input'}),
+        widget=forms.PasswordInput(attrs={'class': 'uk-input', 'placeholder': 'Password'}),
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
         label=_("Password confirmation"),
-        widget=forms.PasswordInput(attrs={'class': 'uk-input'}),
+        widget=forms.PasswordInput(attrs={'class': 'uk-input', 'placeholder': 'Password confirmation'}),
         strip=False,
         help_text=_("Enter the same password as before, for verification."),
     )
 
     class Meta(CustomUserCreationForm.Meta):
         model = User
+        fields = CustomUserCreationForm.Meta.fields + ('first_name', 'last_name')
         widgets = {
-            'email': forms.EmailInput(attrs={'class': 'uk-input'})
+            'email': forms.EmailInput(attrs={'class': 'uk-input', 'placeholder': 'Email'}),
+            'first_name': forms.TextInput(attrs={'class': 'uk-input', 'placeholder': 'First name'}),
+            'last_name': forms.TextInput(attrs={'class': 'uk-input', 'placeholder': 'Last name'})
         }
 
     @transaction.atomic
