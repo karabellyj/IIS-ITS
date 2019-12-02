@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Comment, Attachment, Ticket
+from .models import Comment, Attachment, Ticket, Product
 
 
 class AddTicketForm(forms.ModelForm):
@@ -12,6 +12,17 @@ class AddTicketForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class': 'uk-textarea'}),
             'product': forms.Select(attrs={'class': 'uk-select'}),
             'author': forms.HiddenInput,
+        }
+
+
+class AddProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('name', 'manager', 'parent',)
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'uk-input'}),
+            'manager': forms.Select(attrs={'class': 'uk-select'}),
+            'parent': forms.Select(attrs={'class': 'uk-select'}),
         }
 
 

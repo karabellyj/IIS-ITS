@@ -5,7 +5,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 from django_filters.views import FilterView
 
 from .filters import TicketFilter
-from .forms import CommentForm, AttachmentForm, AddTicketForm
+from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm
 from .models import Ticket, Product, Task
 
 
@@ -80,8 +80,8 @@ class ProductListView(PermissionRequiredMixin, FilterView):
 
 
 class ProductCreateView(PermissionRequiredMixin, CreateView):
-    model = Product
-    fields = ('name', 'manager', 'parent',)
+    form_class = AddProductForm
+    template_name = 'core/product_form.html'
     success_url = reverse_lazy('core:product-list')
     permission_required = ('core.add_product',)
 
