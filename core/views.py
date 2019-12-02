@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django_filters.views import FilterView
 
-from .filters import TicketFilter
+from .filters import TicketFilter, TaskFilter
 from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm, AddTaskForm
 from .models import Ticket, Product, Task
 
@@ -106,7 +106,7 @@ class ProductDetailView(PermissionRequiredMixin, DetailView):
 
 class TaskListView(PermissionRequiredMixin, FilterView):
     model = Task
-    filterset_fields = ('state',)
+    filterset_class = TaskFilter
     template_name = 'core/task_list.html'
     permission_required = ('core.view_task',)
 
