@@ -39,6 +39,17 @@ class AddTaskForm(forms.ModelForm):
         }
 
 
+class UpdateTaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('solution_description', 'state', 'reported',)
+        widgets = {
+            'solution_description': forms.TextInput(attrs={'class': 'uk-input'}),
+            'state': forms.Select(attrs={'class': 'uk-select'}),
+            'reported': forms.TimeInput(attrs={'class': 'uk-input', 'placeholder': 'hh:mm:ss'}),
+        }
+
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

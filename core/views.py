@@ -5,7 +5,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 from django_filters.views import FilterView
 
 from .filters import TicketFilter, TaskFilter
-from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm, AddTaskForm
+from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm, AddTaskForm, UpdateTaskForm
 from .models import Ticket, Product, Task
 
 
@@ -134,7 +134,9 @@ class TaskDetailView(PermissionRequiredMixin, UserPassesTestMixin, DetailView):
 
 class TaskUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Task
-    fields = ('solution_description', 'state', 'reported',)
+    form_class = UpdateTaskForm
+    template_name = 'core/task_form.html'
+    success_url = reverse_lazy('core:task-list')
     permission_required = ('core.change_task',)
 
     def test_func(self):
