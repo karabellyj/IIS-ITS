@@ -90,7 +90,7 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
 
 class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     model = Product
-    fields = ('name', 'manager', 'parent',)
+    form_class = AddProductForm
     success_url = reverse_lazy('core:product-list')
     permission_required = ('core.change_product',)
 
