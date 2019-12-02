@@ -32,6 +32,7 @@ INSTALLED_ADDONS = [
 # overwritten, so they should be placed *after* this section.
 
 import aldryn_addons.settings
+
 aldryn_addons.settings.load(locals())
 
 # Your own Django settings can be applied from here on. Key settings like
@@ -60,3 +61,5 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+MIGRATION_COMMANDS = ['python manage.py initgroups']
