@@ -1,20 +1,33 @@
-{% extends 'base.html' %}
+{% extends 'dashboard_base.html' %}
 {% block title %}Users{% endblock %}
 {% block content %}
     <form action="" method="get">
         {{ filter.form.as_p }}
-        <input type="submit" />
+        <input type="submit"/>
     </form>
-    {% if perms.users.add_user %}
-        <a href="{% url 'users:user-create' %}" class="uk-button uk-button-default">Create user</a>
-    {% endif %}
-    <ul>
-    {% for object in object_list %}
-        <li><a href="{% url 'users:user-detail' object.pk %}">{{ object.email }}</a> <a
-                href="{% url 'users:user-update' object.pk %}">&#x270E;</a> <a href="{% url 'users:user-delete' object.pk %}">&#x2717;</a></li>
-    {% empty %}
-        <li>No users yet.</li>
-    {% endfor %}
+    <ul class="uk-list uk-list-striped">
+        {% for object in object_list %}
+            <li>
+                <div class="uk-grid">
+                    <div class="uk-width-auto">
+                        <a href="{% url 'users:user-detail' object.pk %}">{{ object.email }}</a>
+                    </div>
+                    <div class="uk-width-expand uk-flex-inline uk-flex-right">
+                        {% if perms.core.change_task %}
+                            <a class="uk-button uk-button-primary"
+                               href="{% url 'users:user-update' object.pk %}">Update</a>
+                        {% endif %}
+                        {% if perms.core.delete_task %}
+                            <a class="uk-button uk-button-danger uk-margin-left"
+                               href="{% url 'users:user-delete' object.pk %}">Delete</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </li>
+        {% empty %}
+            <li>No users yet.</li>
+        {% endfor %}
     </ul>
     {#    TODO: add pagination handling #}
 {% endblock %}
