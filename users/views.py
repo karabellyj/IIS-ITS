@@ -67,8 +67,8 @@ class UserUpdateView(PermissionRequiredMixin, UpdateView):
             group = Group.objects.get(name=get_user_group_by_type(self.object.user_type))
             self.object.groups.add(group)
 
-            user_cls = get_user_class_by_type(self.object.user_type)
-            user_cls.objects.get(user=self.object).delete()
+            user_cls = get_user_class_by_type(self.get_object().user_type)
+            user_cls.objects.get(user=self.get_object()).delete()
 
             new_user_cls = get_user_class_by_type(form.cleaned_data['user_type'])
             new_user_cls.objects.create(user=self.object)
