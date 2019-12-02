@@ -8,14 +8,6 @@
     <ul class="uk-list uk-list-striped">
         {% for task in object_list %}
             <li>
-                <a href="{% url 'core:task-detail' task.pk %}">{{ task.task_description }}
-                    - {{ task.reported|default_if_none:'No time reported' }}</a>
-                {% if perms.core.change_task %}
-                    <a href="{% url 'core:task-update' task.pk %}">&#x270E;</a>
-                {% endif %}
-                {% if perms.core.delete_task %}
-                    <a href="{% url 'core:task-delete' task.pk %}">&#x2717;</a>
-                {% endif %}
                 <div class="uk-grid">
                     <div class="uk-width-auto">
                         <a href="{% url 'core:task-detail' task.pk %}">{{ task.task_description }}
