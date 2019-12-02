@@ -62,4 +62,4 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-MIGRATION_COMMANDS = ['python manage.py initgroups']
+MIGRATION_COMMANDS = ['python manage.py migrate --noinput', 'python manage.py initgroups']
