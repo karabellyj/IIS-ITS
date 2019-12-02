@@ -1,5 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'dashboard_base.html' %}
 {% block title %}User detail{% endblock %}
 {% block content %}
-    {{ user_object }}
+    <div class="uk-container uk-container-small">
+       <ul class="uk-list uk-list-striped">
+           <li>Email: {{ user_object.email }}</li>
+           <li>First name: {{ user_object.first_name }}</li>
+           <li>Last name: {{ user_object.last_name }}</li>
+           <li>Type: <span class="uk-badge">{{ user_object.get_user_type_display }}</span></li>
+       </ul>
+    </div>
 {% endblock %}

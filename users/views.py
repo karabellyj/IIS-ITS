@@ -11,7 +11,7 @@ from django_filters.views import FilterView
 from .utils import get_user_group_by_type, get_user_class_by_type
 from .filters import UserFilter
 from .models import User
-from .forms import CustomerSignUpForm, AllUsersCreateForm
+from .forms import CustomerSignUpForm, AllUsersCreateForm, UpdateUserForm
 
 
 class SignUpView(CreateView):
@@ -56,7 +56,7 @@ class UserCreateView(PermissionRequiredMixin, CreateView):
 
 class UserUpdateView(PermissionRequiredMixin, UpdateView):
     model = User
-    fields = ('email', 'first_name', 'last_name', 'user_type')
+    form_class = UpdateUserForm
     success_url = reverse_lazy('users:user-list')
     permission_required = ('users.change_user',)
 
