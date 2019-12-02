@@ -23,6 +23,16 @@ class HomeView(TemplateView):
         return context
 
 
+class MyTicketListView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tickets'] = Ticket.objects.select_related('author').filter(author=self.request.user).all()
+        context['STATES'] = Ticket.STATE
+        return context
+
+
 class DashboardView(UserPassesTestMixin, TemplateView):
     template_name = 'dashboard.html'
 

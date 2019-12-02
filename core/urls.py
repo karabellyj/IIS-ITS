@@ -6,7 +6,7 @@ app_name = "core"
 urlpatterns = [
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
 
-    path('tickets/', views.TicketListView.as_view(), name='ticket-list'),
+    path('my-tickets/', views.MyTicketListView.as_view(), name='my-ticket-list'),
     path('ticket/create/', views.TicketCreateView.as_view(), name='ticket-create'),
     path('ticket/<int:pk>/', views.TicketDetailView.as_view(), name='ticket-detail'),
     path('ticket/<int:pk>/update/', views.TicketUpdateView.as_view(), name='ticket-update'),
