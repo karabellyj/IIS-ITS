@@ -5,7 +5,8 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 from django_filters.views import FilterView
 
 from .filters import TicketFilter, TaskFilter, ProductFilter
-from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm, AddTaskForm, UpdateTaskForm
+from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm, AddTaskForm, UpdateTaskForm, \
+    UpdateStateTicketForm
 from .models import Ticket, Product, Task
 
 
@@ -63,7 +64,8 @@ class TicketUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView)
 
 class TicketStateUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ticket
-    fields = ('state',)
+    form_class = UpdateStateTicketForm
+    template_name = 'core/ticket_form.html'
     success_url = reverse_lazy('home')
     permission_required = ('core.change_state_ticket',)
 

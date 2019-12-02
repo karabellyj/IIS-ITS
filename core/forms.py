@@ -15,6 +15,15 @@ class AddTicketForm(forms.ModelForm):
         }
 
 
+class UpdateStateTicketForm(forms.ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ('state',)
+        widgets = {
+            'state': forms.Select(attrs={'class': 'uk-select'})
+        }
+
+
 class AddProductForm(forms.ModelForm):
     class Meta:
         model = Product
