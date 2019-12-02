@@ -1,9 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'dashboard_base.html' %}
 {% block title %}Task detail{% endblock %}
 {% block content %}
-    <h3>{{ object.task_description }}</h3>
-    <p>{{ object.state }}</p>
-    <p>{{ object.solution_description }}</p>
-    <p>Estimated {{ object.estimated }}</p>
-    <p>Reported {{ object.reported|default_if_none:'No time reported' }}</p>
+    <div class="uk-container uk-container-small">
+        <h3>{{ object.task_description }}</h3>
+        <p class="uk-badge">{{ object.state }}</p>
+        <h4>Solution description</h4>
+        <p>{{ object.solution_description }}</p>
+        <hr>
+        <p>Estimated: {{ object.estimated }}</p>
+        <p>Reported: {{ object.reported|default_if_none:'No time reported' }}</p>
+    </div>
 {% endblock %}
