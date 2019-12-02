@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html class="gr__fit_vutbr_cz">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-2">
+    <title>Projekt IIS</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid black;
+            padding: 0.3em 0.5em;
+            text-align: left;
+        }
+
+        dt {
+            font-weight: bold;
+            margin-top: 0.5em;
+        }
+    </style>
+    <style>@media print {#ghostery-purple-box {
+        display:none
+
+    !important
+    }
+
+    }</style>
+</head>
+<body data-gr-c-s-loaded="true">
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>ITS (Issue Tracking System): hlášení, správa a monitoring problémů a závad</h1>
+<!-- Nahradte názvem svého zadání -->
+
+<dl>
+    <dt>Autoři</dt>
+    <dd>První jméno <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+        <a href="mailto:xkarab03@stud.fit.vutbr.cz">xkarab03@stud.fit.vutbr.cz</a> -
+        backend
+    </dd>
+    <dd>Druhé jméno <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+        <a href="mailto:xkucha26@stud.fit.vutbr.cz">xkucha26@stud.fit.vutbr.cz</a> -
+        frontend
+    </dd>
+    <dt>URL aplikace</dt>
+    <dd><a href="https://its-iis.us.aldryn.io/">https://its-iis.us.aldryn.io/</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+    <tbody>
+    <tr>
+        <th>Login</th>
+        <th>Heslo</th>
+        <th>Role</th>
+    </tr>
+    <tr>
+        <td>admin@example.com</td>
+        <td>admin123</td>
+        <td>Administrátor</td>
+    </tr>
+    <tr>
+        <td>lead@example.com</td>
+        <td>lead123</td>
+        <td>Vedoucí</td>
+    </tr>
+    <tr>
+        <td>manager1@example.com</td>
+        <td>man123</td>
+        <td>Manažer</td>
+    </tr>
+    <tr>
+        <td>manager2@example.com</td>
+        <td>man123</td>
+        <td>Manažer</td>
+    </tr>
+    <tr>
+        <td>employee1@example.com</td>
+        <td>emp123</td>
+        <td>Pracovník</td>
+    </tr>
+    <tr>
+        <td>employee2@example.com</td>
+        <td>emp123</td>
+        <td>Pracovník</td>
+    </tr>
+    <tr>
+        <td>customer1@example.com</td>
+        <td>cust123</td>
+        <td>Zákazník</td>
+    </tr>
+    <tr>
+        <td>customer2@example.com</td>
+        <td>cust123</td>
+        <td>Zákazník</td>
+    </tr>
+    </tbody>
+</table>
+
+<p>(Diagram případů užití není nutné vkládat, pokud IS implementuje role a případy užití definované zadáním.)</p>
+
+<h2>Implementace</h2>
+<p>Stručná dokumentace k implementaci, která popisuje, které části
+    projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
+
+<h3>Databáze</h3>
+<img src="data/db_to_png.png" alt="db_image_missing">
+
+<h2>Instalace</h2>
+Inštalácia na server je veľmi podobná tej lokálnej, kde sa spustí Docker a poskladá obrazy.
+Pre lokálne spustenie je preto jedinou požiadavkou Docker a nástroj docker-compose.
+<ul>
+    <li>Prvý krok je spustiť v koreňovej zložke aplikácie <pre>docker-compose build</pre></li>
+    <li>Následne príkaz <pre>docker-compose run --rm web start migrate</pre>,ktorý môže na prvý pokus skončiť <b>neúspešne</b>, pretože nenabehla ešte databáza</li>
+    <li>Finálnym krokom je <pre>docker-compose up</pre>,ktorý spustí aplikáciu na <a href="http://localhost:8000/">http://localhost:8000/</a></li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Zde popište, které body zadání nejsou implementovány a z jakého
+    důvodu. Např. &#8222;Z časových důvodů nebyla implementována správa
+    uživatelů.&#8221; Pomůžete tím zrychlit hodnocení, když neimplementované
+    funkce nebudeme muset dlouze hledat.</p>
+
+
+</body>
+</html>
