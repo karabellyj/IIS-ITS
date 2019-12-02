@@ -104,8 +104,20 @@
 <p>(Diagram pøípadù u¾ití není nutné vkládat, pokud IS implementuje role a pøípady u¾ití definované zadáním.)</p>
 
 <h2>Implementace</h2>
-<p>Struèná dokumentace k implementaci, která popisuje, které èásti
-    projektu (napø. PHP skripty) implementují jednotlivé pøípady pou¾ití.</p>
+<p>Projekt je rozdelený na dve podaplikácie (users a core). Kde vo <i>users/views.py</i> sa <code>SignUpView</code>
+    stará o registáciu a <code>UserProfileView</code> o zobrazenie profilu u¾ívateµa. Ostatné views slú¾ia na správu
+    u¾ívateµov
+    Adminom (<code>UserListView</code>, <code>UserDetailView</code>, <code>UserCreateView</code>,
+    <code>UserUpdateView</code>, <code>UserDeleteView</code>). V <i>core/views.py</i> <code>HomeView</code> zobrazuje
+    poèiatoènú stránku dostupnú pre v¹etkých. <code>DashboardView</code> zobrazuje dashboard dostupný pre zamestnancov.
+    <code>TicketCreateView</code>, <code>TicketDetailView</code>, <code>TicketUpdateView</code> slú¾ia na správu
+    Ticketov (vytvorenie, prezeranie a úpravu). <code>TicketStateUpdateView</code> je urèený len pre Managera na zmenu
+    stavu. <code>ProductListView</code>, <code>ProductCreateView</code>, <code>ProductUpdateView</code>,
+    <code>ProductDeleteView</code>, <code>ProductDetailView</code> sa starajú o prácu s Produktom.
+    <code>TaskListView</code>, <code>TaskCreateView</code>, <code>TaskDetailView</code>, <code>TaskUpdateView</code>,
+    <code>TaskDeleteView</code> slú¾ia na prácu s Úlohami. <code>CommentCreateView</code> slú¾i na vytvorenie komentáru.
+    <code>AttachmentCreateView</code> slú¾i na vytvorenie príloh.
+</p>
 
 <h3>Databáze</h3>
 <img src="data/db_to_png.png" alt="db_image_missing">
@@ -114,9 +126,22 @@
 In¹talácia na server je veµmi podobná tej lokálnej, kde sa spustí Docker a poskladá obrazy.
 Pre lokálne spustenie je preto jedinou po¾iadavkou Docker a nástroj docker-compose.
 <ul>
-    <li>Prvý krok je spusti» v koreòovej zlo¾ke aplikácie <pre>docker-compose build</pre></li>
-    <li>Následne príkaz <pre>docker-compose run --rm web start migrate</pre>,ktorý mô¾e na prvý pokus skonèi» <b>neúspe¹ne</b>, preto¾e nenabehla e¹te databáza</li>
-    <li>Finálnym krokom je <pre>docker-compose up</pre>,ktorý spustí aplikáciu na <a href="http://localhost:8000/">http://localhost:8000/</a></li>
+    <li>Prvý krok je spusti» v koreòovej zlo¾ke aplikácie
+        <pre>docker-compose build</pre>
+    </li>
+    <li>Následne príkaz
+        <pre>docker-compose run --rm web start migrate</pre>
+        ,ktorý mô¾e na prvý pokus skonèi» <b>neúspe¹ne</b>, preto¾e nenabehla e¹te databáza
+    </li>
+    <li>Finálnym krokom je
+        <pre>docker-compose up</pre>
+        ,ktorý spustí aplikáciu na <a href="http://localhost:8000/">http://localhost:8000/</a></li>
+    <li>Pre nahranie poèiatoèných dát do DB je nutné spusti» v danom poradí, obrázky neboli pridané do Tiketov z dôvodu
+        limitu odovzdaného archívu
+        <pre>docker-compose run --rm web python manage.py loaddata users.json</pre>
+        <pre>docker-compose run --rm web python manage.py loaddata core.json</pre>
+        <b>POZOR!</b> táto operácia nekontroluje existenciu dát v DB
+    </li>
 </ul>
 
 <h2>Známé problémy</h2>
