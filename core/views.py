@@ -31,9 +31,13 @@ class DashboardView(UserPassesTestMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        one_week_ago = datetime.today() - timedelta(days=7)
+        context['USER_TYPES'] = User.USER_TYPES
+
         if self.request.user.user_type == User.USER_TYPES.employee:
             context['number_of_unfinished_tasks'] = Task.objects.filter(employee__user=self.request.user).exclude(
                 state=Task.STATE.done).count()
+            context['your_tasks'] = Task.objects.filter(employee__user=self.request.user).all()
         if self.request.user.user_type == User.USER_TYPES.manager:
             context['number_of_assigned_unfinished_tasks'] = Task.objects.filter(created_by=self.request.user).exclude(
                 state=Task.STATE.done).count()
@@ -41,7 +45,8 @@ class DashboardView(UserPassesTestMixin, TemplateView):
                 product__manager__user=self.request.user).exclude(
                 state__in=[Ticket.STATE.rejected, Ticket.STATE.done]
             ).count()
-        one_week_ago = datetime.today() - timedelta(days=7)
+            context['your_tasks'] = Task.objects.filter(created_by=self.request.user).all()
+            context['your_tickets'] = Ticket.objects.filter(product__manager__user=self.request.user).all()
         if self.request.user.user_type == User.USER_TYPES.lead or self.request.user.user_type == User.USER_TYPES.admin:
             context['number_of_new_tickets_this_week'] = Ticket.objects.filter(created__gte=one_week_ago).count()
         if self.request.user.user_type == User.USER_TYPES.admin:
