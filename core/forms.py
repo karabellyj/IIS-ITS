@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Comment, Attachment, Ticket, Product
+from .models import Comment, Attachment, Ticket, Product, Task
 
 
 class AddTicketForm(forms.ModelForm):
@@ -23,6 +23,19 @@ class AddProductForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'uk-input'}),
             'manager': forms.Select(attrs={'class': 'uk-select'}),
             'parent': forms.Select(attrs={'class': 'uk-select'}),
+        }
+
+
+class AddTaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ('task_description', 'state', 'estimated', 'employee', 'created_by',)
+        widgets = {
+            'task_description': forms.TextInput(attrs={'class': 'uk-input'}),
+            'state': forms.Select(attrs={'class': 'uk-select'}),
+            'estimated': forms.TimeInput(attrs={'class': 'uk-input', 'type': 'time'}),
+            'employee': forms.Select(attrs={'class': 'uk-select'}),
+            'created_by': forms.HiddenInput
         }
 
 

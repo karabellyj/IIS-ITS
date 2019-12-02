@@ -5,7 +5,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 from django_filters.views import FilterView
 
 from .filters import TicketFilter
-from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm
+from .forms import CommentForm, AttachmentForm, AddTicketForm, AddProductForm, AddTaskForm
 from .models import Ticket, Product, Task
 
 
@@ -112,8 +112,8 @@ class TaskListView(PermissionRequiredMixin, FilterView):
 
 
 class TaskCreateView(PermissionRequiredMixin, CreateView):
-    model = Task
-    fields = ('task_description', 'state', 'estimated', 'employee', 'created_by',)
+    form_class = AddTaskForm
+    template_name = 'core/task_form.html'
     success_url = reverse_lazy('core:task-list')
     permission_required = ('core.add_task',)
 
