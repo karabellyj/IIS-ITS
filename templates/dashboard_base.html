@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - </title>
+    <!-- CSS FILES -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/uikit.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+<!--HEADER-->
+<header id="top-head" class="uk-position-fixed">
+    <div class="uk-container uk-container-expand uk-background-primary">
+        <nav class="uk-navbar uk-light" data-uk-navbar="mode:click; duration: 250">
+            <div class="uk-navbar-left">
+                <div class="uk-navbar-item uk-hidden@m">
+                    <a class="uk-logo" href="#">Logo</a>
+                </div>
+            </div>
+            <div class="uk-navbar-right">
+                <ul class="uk-navbar-nav">
+                    <li><a href="{% url 'users:user-profile' %}" data-uk-icon="icon:user" title="Your profile"
+                           data-uk-tooltip></a></li>
+                    <li><a href="{% url 'logout' %}" data-uk-icon="icon:  sign-out" title="Sign Out"
+                           data-uk-tooltip></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--/HEADER-->
+<!-- LEFT BAR -->
+<aside id="left-col" class="uk-light uk-visible@m">
+    <div class="left-logo uk-flex uk-flex-middle">
+        Logo
+    </div>
+    <div class="left-content-box  content-box-dark">
+        <h4 class="uk-text-center uk-margin-remove-vertical text-light">{{ user.get_full_name }}</h4>
+
+        <div class="uk-position-relative uk-text-center uk-display-block">
+            <p class="uk-text-small uk-text-muted uk-display-block uk-text-center">{{ user.get_user_type_display }}</p>
+        </div>
+    </div>
+
+    <div class="left-nav-wrap">
+        <ul class="uk-nav uk-nav-default uk-nav-parent-icon" data-uk-nav>
+            <li class="uk-nav-header">ACTIONS</li>
+            <!--Tickets-->
+            <li class="uk-parent">
+                <a href="#"><span data-uk-icon="icon: comments" class="uk-margin-small-right"></span>Tickets</a>
+                <ul class="uk-nav-sub">
+                    <li><a href="{% url 'core:ticket-create' %}">Create Ticket</a></li>
+                    <li><a href="{% url 'home' %}">View Tickets</a></li>
+                </ul>
+            </li>
+            <!--/Tickets-->
+            {% if perms.core.view_product %}
+                <!--Products-->
+                <li class="uk-parent">
+                    <a href="#"><span data-uk-icon="icon: folder" class="uk-margin-small-right"></span>Products</a>
+                    <ul class="uk-nav-sub">
+                        {% if perms.core.add_product %}
+                            <li><a href="{% url 'core:product-create' %}">Create Product</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'core:product-list' %}">View Products</a></li>
+                    </ul>
+                </li>
+                <!--/Products-->
+            {% endif %}
+            {% if perms.core.view_task %}
+                <!--Tasks-->
+                <li class="uk-parent">
+                    <a href="#"><span data-uk-icon="icon: album" class="uk-margin-small-right"></span>Tasks</a>
+                    <ul class="uk-nav-sub">
+                        {% if perms.core.add_task %}
+                            <li><a href="{% url 'core:task-create' %}">Create Task</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'core:task-list' %}">View Tasks</a></li>
+                    </ul>
+                </li>
+                <!--/Tasks-->
+            {% endif %}
+            {% if perms.core.view_user %}
+                <!--Users-->
+                <li class="uk-parent">
+                    <a href="#"><span data-uk-icon="icon: users" class="uk-margin-small-right"></span>Users</a>
+                    <ul class="uk-nav-sub">
+                        {% if perms.core.add_product %}
+                            <li><a href="{% url 'users:user-create' %}">Create User</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'users:user-list' %}">View Users</a></li>
+                    </ul>
+                </li>
+                <!--/Users-->
+            {% endif %}
+        </ul>
+    </div>
+    <div class="bar-bottom">
+        <ul class="uk-subnav uk-flex uk-flex-center uk-child-width-1-5" data-uk-grid>
+            <li>
+                <a href="{% url 'core:dashboard' %}" class="uk-icon-link" data-uk-icon="icon: home" title="Home"
+                   data-uk-tooltip></a>
+            </li>
+            <li>
+                <a href="{% url 'users:user-profile' %}" data-uk-icon="icon:user" title="Your profile"
+                   data-uk-tooltip></a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}" class="uk-icon-link" data-uk-tooltip="Sign out"
+                   data-uk-icon="icon: sign-out"></a>
+            </li>
+        </ul>
+    </div>
+</aside>
+<!-- /LEFT BAR -->
+<!-- CONTENT -->
+<div id="content" data-uk-height-viewport="expand: true">
+    <div class="uk-container uk-container-expand">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+<!-- /CONTENT -->
+
+<!-- JS FILES -->
+<script src="{% static 'js/uikit.min.js' %}"></script>
+<script src="{% static 'js/uikit-icons.min.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

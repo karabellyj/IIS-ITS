@@ -3,3 +3,6 @@ https://control.divio.com/api/v1/apps/serve/aldryn-addons/1.1.0/7a2d5a44-16e2-4e
 https://control.divio.com/api/v1/apps/serve/aldryn-django/2.2.5.1/73763ae4-1da2-4903-a486-5c031b499948/aldryn-django-2.2.5.1.tar.gz#egg=aldryn-django==2.2.5.1
 https://control.divio.com/api/v1/apps/serve/aldryn-sso/1.6.0/6d90e844-d7ef-4faa-b527-5df3d49277be/aldryn-sso-1.6.0.tar.gz#egg=aldryn-sso==1.6.0
 # </INSTALLED_ADDONS>
+django-model-utils==3.2.0
+django-mptt==0.10.0
+django-filter==2.2.0

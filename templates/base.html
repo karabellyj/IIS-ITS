@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/uikit.min.css' %}"/>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+    <nav class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="{% url 'home' %}">Logo</a>
+            <ul class="uk-navbar-nav">
+                <li><a href="{% url 'core:ticket-list' %}">Tickets</a></li>
+                {% if perms.core.view_product %}
+                    <li><a href="{% url 'core:product-list' %}">Products</a></li>
+                {% endif %}
+                {% if perms.core.view_task %}
+                    <li><a href="{% url 'core:task-list' %}">Tasks</a></li>
+                {% endif %}
+                {% if perms.users.view_user %}
+                    <li><a href="{% url 'users:user-list' %}">Users</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+            {% if user.is_authenticated %}
+                <span class="uk-margin-small-right">Hi {{ user.email }}</span>
+                <a class="uk-button uk-button-default uk-margin-small-right" href="{% url 'logout' %}">logout</a>
+            {% else %}
+                <div class="uk-navbar-item">
+                    <span class="uk-margin-small-right">You are not logged in</span>
+                    <a class="uk-button uk-button-default" href="{% url 'login' %}">login</a>
+                    <span class="uk-margin-small-left uk-margin-small-right">or</span>
+                    <a class="uk-button uk-button-default" href="{% url 'signup' %}">signup</a>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
+</div>
+{% block content %}{% endblock %}
+
+<script src="{% static 'js/uikit.min.js' %}"></script>
+<script src="{% static 'js/uikit-icons.min.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

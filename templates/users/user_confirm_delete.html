@@ -1,0 +1,10 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}Confirm user deletion{% endblock %}
+{% block content %}
+    <div class="uk-container uk-container-small">
+        <form method="post">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ user_object }}"?</p>
+            <input class="uk-button uk-button-primary" type="submit" value="Confirm">
+        </form>
+    </div>
+{% endblock %}

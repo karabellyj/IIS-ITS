@@ -1,0 +1,41 @@
+{% extends 'dashboard_base.html' %}
+{% load mptt_tags %}
+{% block title %}Products{% endblock %}
+{% block content %}
+    <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit"/>
+    </form>
+    <ul class="uk-list uk-list-striped">
+        {% recursetree object_list %}
+            <li>
+                <div class="uk-grid">
+                    <div class="uk-width-auto">
+                        <p>{{ node.name }}</p>
+                    </div>
+                    <div class="uk-width-expand uk-flex-inline uk-flex-right">
+                        {% if perms.core.change_product %}
+                            <a class="uk-button uk-button-primary"
+                               href="{% url 'core:product-update' node.pk %}">Update</a>
+                        {% endif %}
+                        {% if perms.core.delete_product %}
+                            <a class="uk-button uk-button-danger uk-margin-left"
+                               href="{% url 'core:product-delete' node.pk %}">Delete</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+                {% if not node.is_leaf_node %}
+                    <ul class="uk-list uk-list-striped children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+        {% if not object_list %}
+            No products yet.
+        {% endif %}
+    </ul>
+    {#    TODO: add pagination handling #}
+{% endblock %}

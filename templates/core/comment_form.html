@@ -1,0 +1,10 @@
+{% extends 'customer_base.html' %}
+{% block title %}Create comment{% endblock %}
+{% block content %}
+    <div class="uk-container uk-container-small">
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button class="uk-button uk-button-primary" type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

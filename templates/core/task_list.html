@@ -1,0 +1,36 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}Tasks{% endblock %}
+{% block content %}
+    <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit"/>
+    </form>
+    <ul class="uk-list uk-list-striped">
+        {% for task in object_list %}
+            <li>
+                <div class="uk-grid">
+                    <div class="uk-width-auto">
+                        <a href="{% url 'core:task-detail' task.pk %}">{{ task.task_description }}
+                            - {{ task.reported|default_if_none:'No time reported' }}</a>
+                    </div>
+                    <div class="uk-width-expand uk-flex-inline uk-flex-right">
+                        {% if perms.core.change_task %}
+                            {% if user == task.employee.user or user == task.created_by %}
+                                <a class="uk-button uk-button-primary"
+                                   href="{% url 'core:task-update' task.pk %}">Update</a>
+                            {% endif %}
+                        {% endif %}
+                        {% if perms.core.delete_task and user == task.created_by %}
+                            <a class="uk-button uk-button-danger uk-margin-left"
+                               href="{% url 'core:task-delete' task.pk %}">Delete</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </li>
+        {% empty %}
+            <li>No tasks yet.</li>
+        {% endfor %}
+    </ul>
+    {#    TODO: add pagination handling #}
+{% endblock %}

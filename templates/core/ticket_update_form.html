@@ -1,0 +1,23 @@
+{% extends 'customer_base.html' %}
+{% block title %}Update ticket{% endblock %}
+{% block content %}
+    <div class="uk-container uk-container-small">
+        <form method="post">
+            {% csrf_token %}
+            <div class="uk-margin">
+                <input class="uk-input" type="text" placeholder="Name" name="name" required>
+            </div>
+            <div class="uk-margin">
+                <textarea class="uk-textarea" rows="5" placeholder="Description" name="description" required></textarea>
+            </div>
+            <div class="uk-margin">
+                <select class="uk-select" name="{{ form.product.name }}" required>
+                    {% for product in form.product.field.queryset %}
+                        <option value="{{ product.pk }}">{{ product }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="uk-button uk-button-primary" type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

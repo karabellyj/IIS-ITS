@@ -1,0 +1,10 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}Confirm task deletion{% endblock %}
+{% block content %}
+    <div class="uk-container uk-container-small">
+        <form method="post">{% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+            <input type="submit" value="Confirm">
+        </form>
+    </div>
+{% endblock %}

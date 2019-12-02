@@ -1,0 +1,39 @@
+{% extends 'auth_base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    {% if form.errors %}
+        <p>Your email and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+    <!-- login -->
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <fieldset class="uk-fieldset">
+            <div class="uk-margin-small">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: mail"></span>
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="uk-margin-small">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                    {{ form.password }}
+                </div>
+            </div>
+            <div class="uk-margin-bottom">
+                <button type="submit" class="uk-button uk-button-primary uk-border-pill uk-width-1-1" value="login">LOG IN</button>
+            </div>
+        </fieldset>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    <!-- /login -->
+{% endblock %}
