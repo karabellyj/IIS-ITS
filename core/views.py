@@ -36,7 +36,7 @@ class TicketListView(FilterView):
 class TicketCreateView(PermissionRequiredMixin, CreateView):
     form_class = AddTicketForm
     template_name = 'core/ticket_form.html'
-    success_url = reverse_lazy('core:ticket-list')
+    success_url = reverse_lazy('home')
     permission_required = ('core.add_ticket',)
 
     def get_initial(self):
@@ -53,7 +53,7 @@ class TicketDetailView(DetailView):
 class TicketUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ticket
     fields = ('name', 'description', 'product')
-    success_url = reverse_lazy('core:ticket-list')
+    success_url = reverse_lazy('home')
     permission_required = ('core.change_ticket',)
     template_name = 'core/ticket_update_form.html'
 
@@ -64,7 +64,7 @@ class TicketUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView)
 class TicketStateUpdateView(PermissionRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ticket
     fields = ('state',)
-    success_url = reverse_lazy('core:ticket-list')
+    success_url = reverse_lazy('home')
     permission_required = ('core.change_state_ticket',)
 
     def test_func(self):
